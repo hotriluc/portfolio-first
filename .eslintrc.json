@@ -13,10 +13,16 @@
   },
   "plugins": ["react"],
   "rules": {
+    "react/prop-types": "off",
+    "react/no-unknown-property": [
+      "off",
+      {
+        "ignore": ["jsx"]
+      }
+    ],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": "error",
-
     "no-unused-vars": [
       "error",
       {
