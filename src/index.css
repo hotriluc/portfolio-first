@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@100;200;300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@100;200;300;400;500;600;700&display=swap');
 
 *,
 *::after,
@@ -24,7 +24,7 @@ body,
 }
 
 body {
-  font-family: "Noto Serif Display", serif;
+  font-family: 'Noto Serif Display', serif;
   background-color: #101010;
   background: radial-gradient(
     circle at top left,
