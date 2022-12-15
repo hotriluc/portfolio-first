@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import Models from './components/scene/Models';
 import { Suspense, useRef } from 'react';
 import CustomLoader from './components/UI/CustomLoader';
+import Hero from './components/sections/Hero';
 
 function App() {
   const domRef = useRef();
@@ -30,9 +31,7 @@ function App() {
               <Environment preset="dawn" />
             </Scroll>
             <Scroll html className="scroll-overlay">
-              <section>
-                <h1>home</h1>
-              </section>
+              <Hero />
               <section></section>
               <section></section>
               <section></section>
