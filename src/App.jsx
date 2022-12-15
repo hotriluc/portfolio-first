@@ -5,6 +5,8 @@ import { Suspense, useRef } from 'react';
 import CustomLoader from './components/ui/CustomLoader';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
+import Works from './components/sections/Works';
+import Contacts from './components/sections/Contacts';
 
 function App() {
   const domRef = useRef();
@@ -34,8 +36,8 @@ function App() {
             <Scroll html className="scroll-overlay">
               <Hero />
               <About />
-              <section></section>
-              <section></section>
+              <Works />
+              <Contacts />
             </Scroll>
           </ScrollControls>
         </Suspense>

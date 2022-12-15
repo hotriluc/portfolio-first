@@ -1,8 +1,9 @@
 import HeadingQuote from '../ui/HeadingQuote';
+import classes from './About.module.css';
 
 const About = () => {
   return (
-    <section>
+    <section className={classes.about}>
       <HeadingQuote>
         <h2>01.About</h2>
         <p>
