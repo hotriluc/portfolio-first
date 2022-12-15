@@ -2,8 +2,9 @@ import { Environment, Scroll, ScrollControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import Models from './components/scene/Models';
 import { Suspense, useRef } from 'react';
-import CustomLoader from './components/UI/CustomLoader';
+import CustomLoader from './components/ui/CustomLoader';
 import Hero from './components/sections/Hero';
+import About from './components/sections/About';
 
 function App() {
   const domRef = useRef();
@@ -32,7 +33,7 @@ function App() {
             </Scroll>
             <Scroll html className="scroll-overlay">
               <Hero />
-              <section></section>
+              <About />
               <section></section>
               <section></section>
             </Scroll>
