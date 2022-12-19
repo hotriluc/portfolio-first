@@ -40,6 +40,7 @@ body {
 
 .scroll-overlay {
   width: 100vw;
+  overflow: hidden;
 }
 
 a {
@@ -52,7 +53,6 @@ h2 {
 }
 
 section {
-  padding: 10rem calc(160px + 2rem);
   scroll-snap-align: start;
   height: 100vh;
 }

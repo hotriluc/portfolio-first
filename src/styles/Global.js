@@ -4,6 +4,14 @@ import styled, { css } from 'styled-components';
 export const Flex = styled.div`
   display: flex;
   justify-content: flex-start;
+  flex-direction: row;
+  gap: ${(props) => props.gap || '4rem'};
+
+  ${(props) =>
+    props.column &&
+    css`
+      flex-direction: column;
+    `}
 
   ${(props) =>
     props.flexEnd &&
@@ -20,7 +28,7 @@ export const Flex = styled.div`
 
 export const Section = styled.section`
   height: ${(props) => props.height || '100vh'};
-  padding: ${(props) => props.padding};
+  padding: ${(props) => props.padding || '10rem 4rem 0 calc(160px + 2rem)'};
 `;
 
 export const Quote = styled(animated.div)`
@@ -41,6 +49,7 @@ export const Quote = styled(animated.div)`
   p {
     font-weight: 300;
     font-size: 2.8rem;
+    line-height: 1.5;
 
     word-wrap: break-word;
   }
@@ -48,4 +57,6 @@ export const Quote = styled(animated.div)`
 
 export const Highlight = styled.span`
   background-color: #a08bc4;
+  padding: 0 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;

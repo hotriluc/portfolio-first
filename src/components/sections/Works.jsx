@@ -5,9 +5,9 @@ const Works = () => {
   return (
     <Section>
       <HeadingQuote>
-        <h2>02.Works</h2>
+        <h2>Works</h2>
         <p>
-          You can check my works here <br />
+          Well designed, useful but also appealing <br />
           (in progress)
         </p>
       </HeadingQuote>

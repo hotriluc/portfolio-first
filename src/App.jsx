@@ -23,7 +23,7 @@ function App() {
           <ambientLight intensity={1} />
 
           <ScrollControls
-            pages={5} // Each page takes 100% of the height of the canvas
+            pages={6} // Each page takes 100% of the height of the canvas
             distance={1} // A factor that increases scroll bar travel (default: 1)
             damping={20} // Friction, higher is faster (default: 4)
             horizontal={false} // Can also scroll horizontally (default: false)
