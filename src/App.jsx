@@ -2,7 +2,7 @@ import { Environment, Scroll, ScrollControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import Models from './components/scene/Models';
 import { Suspense, useRef } from 'react';
-import CustomLoader from './components/ui/CustomLoader';
+// import CustomLoader from './components/ui/CustomLoader';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Works from './components/sections/Works';
@@ -15,7 +15,7 @@ function App() {
     <>
       <div ref={domRef}></div>
 
-      <CustomLoader />
+      {/* <CustomLoader /> */}
       <Canvas className="canvas">
         {/* <Perf position="top-left" /> */}
 

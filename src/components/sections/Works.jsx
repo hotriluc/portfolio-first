@@ -1,16 +1,17 @@
+import { Section } from '../../styles/Global';
 import HeadingQuote from '../ui/HeadingQuote';
 
 const Works = () => {
   return (
-    <section>
+    <Section>
       <HeadingQuote>
         <h2>02.Works</h2>
         <p>
-          Here are some of my works <br />
+          You can check my works here <br />
           (in progress)
         </p>
       </HeadingQuote>
-    </section>
+    </Section>
   );
 };
 

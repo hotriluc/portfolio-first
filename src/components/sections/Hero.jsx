@@ -1,6 +1,6 @@
 import { animated, useSpring, useTrail } from '@react-spring/web';
-
-import classes from './Hero.module.css';
+import { Section } from '../../styles/Global';
+import { Name, Title } from '../../styles/Hero';
 
 export const Hero = () => {
   const name = 'Luc.Ho';
@@ -19,7 +19,7 @@ export const Hero = () => {
   const titleSpring = useSpring({
     from: {
       opacity: 0,
-      y: -50,
+      y: -70,
     },
     to: {
       opacity: 1,
@@ -28,20 +28,20 @@ export const Hero = () => {
   });
 
   return (
-    <section className={classes.hero}>
-      <animated.h1 className={classes.title} style={{ ...titleSpring }}>
+    <Section padding="2rem 4rem">
+      <Title style={{ ...titleSpring }}>
         From designing to creating <br />
-        positive UI and UX
-      </animated.h1>
+        positive Web experience.
+      </Title>
 
-      <animated.h2 className={classes.name}>
+      <Name>
         {trail.map((props, index) => (
           <animated.a key={index} style={props}>
             {name[index]}
           </animated.a>
         ))}
-      </animated.h2>
-    </section>
+      </Name>
+    </Section>
   );
 };
 
