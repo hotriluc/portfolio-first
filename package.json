@@ -12,6 +12,7 @@
     "@react-spring/web": "^9.6.0",
     "@react-three/drei": "^9.46.5",
     "@react-three/fiber": "^8.9.1",
+    "maath": "^0.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6",

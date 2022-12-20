@@ -7,6 +7,7 @@ import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Works from './components/sections/Works';
 import Contacts from './components/sections/Contacts';
+import { Perf } from 'r3f-perf';
 
 function App() {
   const domRef = useRef();
@@ -17,7 +18,7 @@ function App() {
 
       {/* <CustomLoader /> */}
       <Canvas className="canvas">
-        {/* <Perf position="top-left" /> */}
+        <Perf position="top-left" />
 
         <Suspense fallback={null}>
           <ambientLight intensity={1} />

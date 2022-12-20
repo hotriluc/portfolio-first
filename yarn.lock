@@ -2023,6 +2023,11 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+maath@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/maath/-/maath-0.4.2.tgz#379efb3d2fd46bb557333eabb41e4a1d2cbd2766"
+  integrity sha512-9vd9AzZY7XLM159LNyWF6v2Lu1lsnjPMlzdGy3pMKxTUg0mWePdyHjfhNi439RpLZCR33hDkdbxbbsmjWyqhIA==
+
 merge-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"

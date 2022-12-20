@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import {
   useGLTF,
   PerspectiveCamera,
@@ -11,9 +11,40 @@ import {
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 
-export function Models(props) {
-  // const stencil = useMask(1, true);
+import { easing } from 'maath';
 
+function Key({ which, ...props }) {
+  const ref = useRef();
+  const [pressed, press] = useState(false);
+  const { nodes } = useGLTF('scene.glb');
+
+  const [x, y, z] = props.position;
+  console.log(x, y, z);
+
+  //create handler on press and press there and execute function that will ineract with screen
+
+  useFrame((state, delta) => {
+    easing.damp3(
+      ref.current.position,
+      [x, pressed ? y - 0.2 : y, z],
+      0.1,
+      delta
+    );
+  });
+
+  return (
+    <mesh
+      ref={ref}
+      geometry={nodes[which].geometry}
+      onPointerDown={() => press(true)}
+      onPointerUp={() => press(false)}
+      onPointerLeave={() => press(false)}
+      {...props}
+    />
+  );
+}
+
+export function Models(props) {
   const {
     buildingColor,
     buildingRoughness,
@@ -816,7 +847,7 @@ export function Models(props) {
             name="Screen"
             geometry={nodes.Screen.geometry}
             position={[-373.11, 380.27, -177.86]}
-            rotation={[1.21, 0.19, 2.57]}
+            rotation={[1.25, 0.45, 2.57]}
             scale={55.74}
           >
             <meshPhysicalMaterial
@@ -835,7 +866,7 @@ export function Models(props) {
             geometry={nodes.ComputerBody.geometry}
             material={materials.Computer}
             position={[-373.11, 380.27, -177.87]}
-            rotation={[1.21, 0.19, 2.57]}
+            rotation={[1.25, 0.45, 2.57]}
             scale={55.74}
             material-color={computerColor}
             material-roughness={computerRoughness}
@@ -880,52 +911,50 @@ export function Models(props) {
               scale={[0.28, 0.28, 1.08]}
               material={materials.Computer}
             >
-              <mesh
-                name="Cap"
-                geometry={nodes.Cap.geometry}
+              <Key
+                which="Cap"
                 material={materials.Keycap}
                 position={[-0.38, 1.2, 0.59]}
                 rotation={[0, 0, 0]}
                 scale={[0.6, 0.66, 0.12]}
                 material-color={keyCapColor}
                 material-roughness={keyCapRoughness}
-                // material-wireframe={true}
               />
-              <mesh
-                name="Cap001"
-                geometry={nodes.Cap001.geometry}
+
+              <Key
+                which="Cap001"
                 material={materials.Keycap}
                 position={[-1.61, 1.44, 0.59]}
                 rotation={[0, 0, 0]}
                 scale={[0.6, 0.66, 0.12]}
               />
-              <mesh
-                name="Cap002"
-                geometry={nodes.Cap002.geometry}
+
+              <Key
+                which="Cap002"
                 material={materials.Keycap}
                 position={[-0.38, 1.2, 0.24]}
                 rotation={[0, 0, 0]}
                 scale={[0.6, 0.66, 0.12]}
               />
-              <mesh
-                name="Cap003"
-                geometry={nodes.Cap003.geometry}
+
+              <Key
+                which="Cap003"
                 material={materials.Keycap}
                 position={[-1.61, 1.44, 0.24]}
                 rotation={[0, 0, 0]}
                 scale={[0.6, 0.66, 0.12]}
               />
-              <mesh
-                name="Cap004"
-                geometry={nodes.Cap004.geometry}
+
+              <Key
+                which="Cap004"
                 material={materials.Keycap}
                 position={[-0.38, 1.2, -0.12]}
                 rotation={[0, 0, 0]}
                 scale={[0.6, 0.66, 0.12]}
               />
-              <mesh
-                name="Cap005"
-                geometry={nodes.Cap005.geometry}
+
+              <Key
+                which="Cap005"
                 material={materials.Keycap}
                 position={[-1.61, 1.44, -0.12]}
                 rotation={[0, 0, 0]}
