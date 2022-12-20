@@ -6,10 +6,11 @@ const Contacts = () => {
     <Section>
       <Flex flexEnd>
         <HeadingQuote>
-          <h2>03.Contact</h2>
+          <h2>Get in touch</h2>
           <p>
-            Get in touch with me by clicking one of the following links on phone
-            screen.
+            I am always interested in anything related to the Web. <br />
+            Whether you have a question or want to say hello. <br />I would glad
+            to help you.
           </p>
         </HeadingQuote>
       </Flex>
