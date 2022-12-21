@@ -34,10 +34,62 @@ const Key = ({ which, ...props }) => {
   );
 };
 
+const Joystick = (props) => {
+  const ref = useRef();
+  const [pressed, press] = useState(false);
+  const { nodes } = useGLTF('scene.glb');
+
+  //create handler on press and press there and execute function that will ineract with screen
+
+  useFrame((state, delta) => {
+    easing.damp3(ref.current.rotation, [0, 0, pressed ? -0.4 : 0], 0.1, delta);
+  });
+
+  return (
+    <>
+      <mesh
+        name="JoystickHolder"
+        geometry={nodes.JoystickHolder.geometry}
+        material={props.holderMaterial}
+        position={[-1.15, -1.55, -0.62]}
+        rotation={[0, 0, -0.19]}
+        scale={[-0.9, -0.52, -0.14]}
+      />
+      <group
+        name="Joystick"
+        position={[-1.2, 0.5, -0.62]}
+        scale={[0.3, 0.3, 0.08]}
+        // rotation-z={-0.4}
+        ref={ref}
+      >
+        <mesh
+          name="Sphere001"
+          geometry={nodes.Sphere001.geometry}
+          material={props.joystickMaterial}
+          onPointerDown={() => {
+            press(!pressed);
+          }}
+          //   onPointerUp={() => press(false)}
+        />
+        <mesh
+          name="Sphere001_1"
+          geometry={nodes.Sphere001_1.geometry}
+          material={props.joystickMaterial}
+        />
+      </group>
+    </>
+  );
+};
+
 const Computer = ({ portal }) => {
   const computerRef = useRef();
   const computerBodyRef = useRef();
   const { nodes, materials } = useGLTF('scene.glb');
+
+  //   useFrame((state) => {
+  //     // const et = state.clock.elapsedTime;
+  //     // computerRef.current.position.y = Math.sin(et * 0.7 + 1 * 3000) * 2;
+  //   });
 
   const {
     computerColor,
@@ -155,7 +207,6 @@ const Computer = ({ portal }) => {
             material-color={keyCapColor}
             material-roughness={keyCapRoughness}
           />
-
           <Key
             which="Cap001"
             material={materials.Keycap}
@@ -163,7 +214,6 @@ const Computer = ({ portal }) => {
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
-
           <Key
             which="Cap002"
             material={materials.Keycap}
@@ -171,7 +221,6 @@ const Computer = ({ portal }) => {
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
-
           <Key
             which="Cap003"
             material={materials.Keycap}
@@ -179,7 +228,6 @@ const Computer = ({ portal }) => {
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
-
           <Key
             which="Cap004"
             material={materials.Keycap}
@@ -187,7 +235,6 @@ const Computer = ({ portal }) => {
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
-
           <Key
             which="Cap005"
             material={materials.Keycap}
@@ -195,30 +242,28 @@ const Computer = ({ portal }) => {
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
-          <mesh
-            name="JoystickHolder"
-            geometry={nodes.JoystickHolder.geometry}
-            material={materials.Keycap}
-            position={[-1.15, -1.55, -0.62]}
-            rotation={[0, 0, -0.19]}
-            scale={[-0.9, -0.52, -0.14]}
+
+          <Joystick
+            holderMaterial={materials.Keycap}
+            joystickMaterial={materials.Dynamic}
+          />
+          {/* <group
+            name="Joystick"
+            position={[-1.2, 0.5, -0.62]}
+            scale={[0.3, 0.3, 0.08]}
+            // rotation-z={-0.4}
           >
             <mesh
-              name="Joystick"
-              geometry={nodes.Joystick.geometry}
-              position={[0.49, -4.46, 0]}
-              scale={[-0.13, -0.58, -0.22]}
+              name="Sphere001"
+              geometry={nodes.Sphere001.geometry}
               material={materials.Dynamic}
-            >
-              <mesh
-                name="Sphere_1"
-                geometry={nodes.Sphere_1.geometry}
-                material={materials.Dynamic}
-                position={[-0.02, 3.08, 0]}
-                scale={[2.48, 0.93, 2.48]}
-              />
-            </mesh>
-          </mesh>
+            />
+            <mesh
+              name="Sphere001_1"
+              geometry={nodes.Sphere001_1.geometry}
+              material={materials.Dynamic}
+            />
+          </group>{' '} */}
 
           <group
             name="Platte"
