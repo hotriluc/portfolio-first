@@ -7,6 +7,7 @@ const initialState = {
   prevCell: { x: 0, y: 0 },
   currentCell: { x: 0, y: 0 },
   galleryDimension: [],
+  projectIsOpened: false,
 };
 
 function mod(a, n) {
@@ -23,6 +24,10 @@ const ComputerSlice = createSlice({
 
     setGalleryDimension: (state, action) => {
       state.galleryDimension = action.payload;
+    },
+
+    openProject: (state) => {
+      state.projectIsOpened = !state.projectIsOpened;
     },
 
     moveUp: (state) => {

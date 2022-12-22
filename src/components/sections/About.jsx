@@ -18,7 +18,7 @@ const About = () => {
           </p>
         </HeadingQuote>
 
-        <Flex flexEnd>
+        <Flex justifyEnd>
           <HeadingQuote>
             <h2>A little bit more</h2>
             <p>

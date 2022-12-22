@@ -4,7 +4,7 @@ import HeadingQuote from '../ui/HeadingQuote';
 const Contacts = () => {
   return (
     <Section>
-      <Flex flexEnd>
+      <Flex justifyEnd>
         <HeadingQuote>
           <h2>Get in touch</h2>
           <p>

@@ -1,10 +1,11 @@
-import { Html, useGLTF } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { easing } from 'maath';
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { computerActions } from '../../store/computer-slice';
+import EmbeddedGallery from './EmbeddedGallery';
 
 const Key = ({ which, command, ...props }) => {
   const ref = useRef();
@@ -47,10 +48,11 @@ const Key = ({ which, command, ...props }) => {
   );
 };
 
-const Joystick = (props) => {
+const Joystick = ({ command, ...props }) => {
   const ref = useRef();
   const [pressed, press] = useState(false);
   const { nodes } = useGLTF('scene.glb');
+  const dispatch = useDispatch();
 
   /**
    * Animate joystick
@@ -58,6 +60,16 @@ const Joystick = (props) => {
   useFrame((state, delta) => {
     easing.damp3(ref.current.rotation, [0, 0, pressed ? -0.4 : 0], 0.1, delta);
   });
+
+  /**
+   * Change state to pressed and dispatch an action to computer store
+   */
+  const toggleJoystickHandler = () => {
+    press(!pressed);
+    if (command) {
+      dispatch(computerActions.openProject());
+    }
+  };
 
   return (
     <>
@@ -79,9 +91,7 @@ const Joystick = (props) => {
           name="Sphere001"
           geometry={nodes.Sphere001.geometry}
           material={props.joystickMaterial}
-          onPointerDown={() => {
-            press(!pressed);
-          }}
+          onPointerDown={toggleJoystickHandler}
         />
         <mesh
           name="Sphere001_1"
@@ -90,97 +100,6 @@ const Joystick = (props) => {
         />
       </group>
     </>
-  );
-};
-
-const Embedded = (props) => {
-  const dispatch = useDispatch();
-  const [galleryRef, setGalleryRef] = useState(null);
-  const { command, currentCell, prevCell } = useSelector(
-    (state) => state.computer
-  );
-
-  /**
-   * On each change of galleryRef
-   * we send new gallery's dimension to the store
-   */
-  useEffect(() => {
-    if (galleryRef) {
-      const totalRows = galleryRef.children.length;
-      const galleryDimension = [];
-
-      let i = 0;
-      while (i < totalRows) {
-        const itemsInRow = galleryRef.children[i].children.length;
-        galleryDimension.push({ row: i, size: itemsInRow });
-        i++;
-      }
-      dispatch(computerActions.setGalleryDimension(galleryDimension));
-    }
-  }, [galleryRef]);
-
-  /**
-   * On command change
-   * send an action that will move current position
-   */
-  useEffect(() => {
-    switch (command) {
-      case 'LEFT':
-        dispatch(computerActions.moveLeft());
-        break;
-      case 'RIGHT':
-        dispatch(computerActions.moveRight());
-        break;
-
-      case 'UP':
-        dispatch(computerActions.moveUp());
-        break;
-
-      case 'DOWN':
-        dispatch(computerActions.moveDown());
-        break;
-
-      default:
-        break;
-    }
-  }, [command]);
-
-  /**
-   * On each rerender that will happen on movement
-   * add active class
-   */
-  if (galleryRef) {
-    galleryRef.children[prevCell.x].children[prevCell.y].className = '';
-    galleryRef.children[currentCell.x].children[currentCell.y].className =
-      'activeItem';
-  }
-
-  return (
-    <Html {...props}>
-      <div
-        id="gallery"
-        style={{ display: 'flex', flexDirection: 'column' }}
-        ref={setGalleryRef}
-      >
-        <div style={{ display: 'flex' }}>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-        </div>
-
-        <div style={{ display: 'flex' }}>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-        </div>
-
-        <div style={{ display: 'flex' }}>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-        </div>
-      </div>
-    </Html>
   );
 };
 
@@ -257,15 +176,15 @@ const Computer = ({ portal }) => {
         material-roughness={computerRoughness}
         ref={computerBodyRef}
       >
-        <Embedded
+        <EmbeddedGallery
           portal={portal}
           rotation-x={-Math.PI / 2}
-          zIndexRange={[-1, 100]}
+          zIndexRange={[1, -10]}
+          //   distance
           transform
           position={[0, -0.1, 0]}
           occlude={[computerBodyRef]}
-        ></Embedded>
-
+        />
         <mesh
           name="Dynamic"
           geometry={nodes.Dynamic.geometry}
@@ -344,6 +263,7 @@ const Computer = ({ portal }) => {
           />
 
           <Joystick
+            command={'OPEN'}
             holderMaterial={materials.Keycap}
             joystickMaterial={materials.Dynamic}
           />

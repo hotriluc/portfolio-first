@@ -14,15 +14,27 @@ export const Flex = styled.div`
     `}
 
   ${(props) =>
-    props.flexEnd &&
+    props.justifyEnd &&
     css`
       justify-content: flex-end;
+    `}
+    
+    ${(props) =>
+    props.justifyCenter &&
+    css`
+      justify-content: center;
     `}
 
   ${(props) =>
     props.spaceBetween &&
     css`
       justify-content: space-between;
+    `}
+
+    ${(props) =>
+    props.alignCenter &&
+    css`
+      align-items: center;
     `}
 `;
 

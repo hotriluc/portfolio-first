@@ -23,11 +23,6 @@ body,
   padding: 0;
 }
 
-.activeItem {
-  background-color: royalblue;
-  scale: 1.1;
-}
-
 body {
   font-family: 'Noto Serif Display', serif;
   background-color: #101010;
@@ -46,6 +41,8 @@ body {
 .scroll-overlay {
   width: 100vw;
   overflow: hidden;
+  position: fixed;
+  z-index: 1000;
 }
 
 a {
@@ -60,4 +57,23 @@ h2 {
 section {
   scroll-snap-align: start;
   height: 100vh;
+}
+
+.activeItem {
+  border: 0.4px solid royalblue;
+  /* padding: 1px; */
+  scale: 1.2;
+  font-size: inherit;
+  transition: scale 0.2s;
+}
+
+.imgHolder {
+  width: 7px;
+  height: 7px;
+  background-color: red;
+}
+
+.imgHolder img {
+  height: 100%;
+  width: 100%;
 }
