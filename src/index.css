@@ -23,6 +23,11 @@ body,
   padding: 0;
 }
 
+.activeItem {
+  background-color: royalblue;
+  scale: 1.1;
+}
+
 body {
   font-family: 'Noto Serif Display', serif;
   background-color: #101010;

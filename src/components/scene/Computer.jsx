@@ -2,17 +2,20 @@ import { Html, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { easing } from 'maath';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { computerActions } from '../../store/computer-slice';
 
-const Key = ({ which, ...props }) => {
+const Key = ({ which, command, ...props }) => {
   const ref = useRef();
+  const dispatch = useDispatch();
   const [pressed, press] = useState(false);
   const { nodes } = useGLTF('scene.glb');
-
   const [x, y, z] = props.position;
 
-  //create handler on press and press there and execute function that will ineract with screen
-
+  /**
+   * Animate key press
+   */
   useFrame((state, delta) => {
     easing.damp3(
       ref.current.position,
@@ -22,11 +25,21 @@ const Key = ({ which, ...props }) => {
     );
   });
 
+  /**
+   * Change state to pressed and dispatch an action to computer store
+   */
+  const pressButtonHandler = () => {
+    press(true);
+    if (command) {
+      dispatch(computerActions.setCommand(command));
+    }
+  };
+
   return (
     <mesh
       ref={ref}
       geometry={nodes[which].geometry}
-      onPointerDown={() => press(true)}
+      onPointerDown={pressButtonHandler}
       onPointerUp={() => press(false)}
       onPointerLeave={() => press(false)}
       {...props}
@@ -39,8 +52,9 @@ const Joystick = (props) => {
   const [pressed, press] = useState(false);
   const { nodes } = useGLTF('scene.glb');
 
-  //create handler on press and press there and execute function that will ineract with screen
-
+  /**
+   * Animate joystick
+   */
   useFrame((state, delta) => {
     easing.damp3(ref.current.rotation, [0, 0, pressed ? -0.4 : 0], 0.1, delta);
   });
@@ -59,7 +73,6 @@ const Joystick = (props) => {
         name="Joystick"
         position={[-1.2, 0.5, -0.62]}
         scale={[0.3, 0.3, 0.08]}
-        // rotation-z={-0.4}
         ref={ref}
       >
         <mesh
@@ -69,7 +82,6 @@ const Joystick = (props) => {
           onPointerDown={() => {
             press(!pressed);
           }}
-          //   onPointerUp={() => press(false)}
         />
         <mesh
           name="Sphere001_1"
@@ -81,15 +93,101 @@ const Joystick = (props) => {
   );
 };
 
+const Embedded = (props) => {
+  const dispatch = useDispatch();
+  const [galleryRef, setGalleryRef] = useState(null);
+  const { command, currentCell, prevCell } = useSelector(
+    (state) => state.computer
+  );
+
+  /**
+   * On each change of galleryRef
+   * we send new gallery's dimension to the store
+   */
+  useEffect(() => {
+    if (galleryRef) {
+      const totalRows = galleryRef.children.length;
+      const galleryDimension = [];
+
+      let i = 0;
+      while (i < totalRows) {
+        const itemsInRow = galleryRef.children[i].children.length;
+        galleryDimension.push({ row: i, size: itemsInRow });
+        i++;
+      }
+      dispatch(computerActions.setGalleryDimension(galleryDimension));
+    }
+  }, [galleryRef]);
+
+  /**
+   * On command change
+   * send an action that will move current position
+   */
+  useEffect(() => {
+    switch (command) {
+      case 'LEFT':
+        dispatch(computerActions.moveLeft());
+        break;
+      case 'RIGHT':
+        dispatch(computerActions.moveRight());
+        break;
+
+      case 'UP':
+        dispatch(computerActions.moveUp());
+        break;
+
+      case 'DOWN':
+        dispatch(computerActions.moveDown());
+        break;
+
+      default:
+        break;
+    }
+  }, [command]);
+
+  /**
+   * On each rerender that will happen on movement
+   * add active class
+   */
+  if (galleryRef) {
+    galleryRef.children[prevCell.x].children[prevCell.y].className = '';
+    galleryRef.children[currentCell.x].children[currentCell.y].className =
+      'activeItem';
+  }
+
+  return (
+    <Html {...props}>
+      <div
+        id="gallery"
+        style={{ display: 'flex', flexDirection: 'column' }}
+        ref={setGalleryRef}
+      >
+        <div style={{ display: 'flex' }}>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+        </div>
+
+        <div style={{ display: 'flex' }}>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+        </div>
+
+        <div style={{ display: 'flex' }}>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </div>
+    </Html>
+  );
+};
+
 const Computer = ({ portal }) => {
   const computerRef = useRef();
   const computerBodyRef = useRef();
   const { nodes, materials } = useGLTF('scene.glb');
-
-  //   useFrame((state) => {
-  //     // const et = state.clock.elapsedTime;
-  //     // computerRef.current.position.y = Math.sin(et * 0.7 + 1 * 3000) * 2;
-  //   });
 
   const {
     computerColor,
@@ -159,16 +257,14 @@ const Computer = ({ portal }) => {
         material-roughness={computerRoughness}
         ref={computerBodyRef}
       >
-        <Html
+        <Embedded
           portal={portal}
           rotation-x={-Math.PI / 2}
           zIndexRange={[-1, 100]}
           transform
           position={[0, -0.1, 0]}
           occlude={[computerBodyRef]}
-        >
-          <h1>hello</h1>
-        </Html>
+        ></Embedded>
 
         <mesh
           name="Dynamic"
@@ -199,6 +295,7 @@ const Computer = ({ portal }) => {
           material={materials.Computer}
         >
           <Key
+            command={'LEFT'}
             which="Cap"
             material={materials.Keycap}
             position={[-0.38, 1.2, 0.59]}
@@ -208,20 +305,15 @@ const Computer = ({ portal }) => {
             material-roughness={keyCapRoughness}
           />
           <Key
-            which="Cap001"
+            command={'RIGHT'}
+            which="Cap004"
             material={materials.Keycap}
-            position={[-1.61, 1.44, 0.59]}
+            position={[-0.38, 1.2, -0.12]}
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
           <Key
-            which="Cap002"
-            material={materials.Keycap}
-            position={[-0.38, 1.2, 0.24]}
-            rotation={[0, 0, 0]}
-            scale={[0.6, 0.66, 0.12]}
-          />
-          <Key
+            command={'UP'}
             which="Cap003"
             material={materials.Keycap}
             position={[-1.61, 1.44, 0.24]}
@@ -229,9 +321,17 @@ const Computer = ({ portal }) => {
             scale={[0.6, 0.66, 0.12]}
           />
           <Key
-            which="Cap004"
+            command={'DOWN'}
+            which="Cap002"
             material={materials.Keycap}
-            position={[-0.38, 1.2, -0.12]}
+            position={[-0.38, 1.2, 0.24]}
+            rotation={[0, 0, 0]}
+            scale={[0.6, 0.66, 0.12]}
+          />
+          <Key
+            which="Cap001"
+            material={materials.Keycap}
+            position={[-1.61, 1.44, 0.59]}
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
