@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { computerActions } from '../../store/computer-slice';
 import { Flex } from '../../styles/Global';
 
+import { animated, useSpring } from '@react-spring/web';
+
 export const Project = (props) => {
   return (
     <div
@@ -14,7 +16,7 @@ export const Project = (props) => {
       }}
     >
       <div className="imgHolder">
-        <img src="./cat.avif" width={2} height={2} alt="" />
+        <img src="./cat.avif" alt="" />
         {props.img}
       </div>
       <p>{props.name}.proj</p>
@@ -24,20 +26,20 @@ export const Project = (props) => {
 
 const data = [
   [
-    { name: 'cat', img: 'cat' },
-    { name: 'dog', img: 'cat' },
-    { name: 'fish', img: 'cat' },
+    { name: 'cat', img: './cat.avif', description: 'good cat' },
+    { name: 'dog', img: './cat.avif', description: 'good dog' },
+    { name: 'fish', img: './cat.avif', description: 'good fish' },
   ],
   [
-    { name: 'f', img: 'cat' },
-    { name: 'f1', img: 'cat' },
-    { name: 'f2', img: 'cat' },
+    { name: 'f', img: './cat.avif' },
+    { name: 'f1', img: './cat.avif' },
+    { name: 'f2', img: './cat.avif' },
   ],
 
   [
-    { name: 'a1', img: 'cat' },
-    { name: 'a2', img: 'cat' },
-    { name: 'a3', img: 'cat' },
+    { name: 'a1', img: './cat.avif' },
+    { name: 'a2', img: './cat.avif' },
+    { name: 'a3', img: './cat.avif' },
   ],
 ];
 
@@ -104,7 +106,16 @@ const EmbeddedGallery = (props) => {
 
   return (
     <Html {...props}>
-      {projectIsOpened && <div>{data[currentCell.x][currentCell.y].name}</div>}
+      {projectIsOpened && (
+        <ProjectDetails
+          name={data[currentCell.x][currentCell.y].name}
+          img={data[currentCell.x][currentCell.y].img}
+          description={
+            data[currentCell.x][currentCell.y].description || 'No description'
+          }
+          currentCell={currentCell}
+        />
+      )}
       <Flex column gap={'.5rem'} ref={setGalleryRef}>
         {data.map((row, rowIndex) => {
           return (
@@ -129,6 +140,44 @@ const EmbeddedGallery = (props) => {
         })}
       </Flex>
     </Html>
+  );
+};
+
+const ProjectDetails = ({ name, description, img }) => {
+  const spring = useSpring({
+    from: { x: -2, opacity: 0 },
+    to: { x: 0, opacity: 1 },
+  });
+
+  useEffect(() => {
+    console.log('data is changed');
+  }, [name]);
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        background: 'red',
+        width: 50,
+        zIndex: 12,
+        height: '100%',
+      }}
+    >
+      <animated.p style={{ ...spring }}>{name}</animated.p>
+      <p>{description}</p>
+      <div
+        style={{
+          height: 25,
+          width: 25,
+          position: 'absolute',
+          top: 10,
+          right: 0,
+          zIndex: -1,
+        }}
+      >
+        <img src={img} style={{ height: '100%', width: '100%' }} />
+      </div>
+    </div>
   );
 };
 

@@ -3,8 +3,8 @@ import HeadingQuote from '../ui/HeadingQuote';
 
 const About = () => {
   return (
-    <Section height="280vh">
-      <Flex column gap="25rem">
+    <Section height="220vh">
+      <Flex column gap="20rem">
         <HeadingQuote>
           <h2>About</h2>
           <p>

@@ -179,8 +179,7 @@ const Computer = ({ portal }) => {
         <EmbeddedGallery
           portal={portal}
           rotation-x={-Math.PI / 2}
-          zIndexRange={[1, -10]}
-          //   distance
+          zIndexRange={[1, -1]}
           transform
           position={[0, -0.1, 0]}
           occlude={[computerBodyRef]}

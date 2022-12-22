@@ -41,7 +41,7 @@ body {
 .scroll-overlay {
   width: 100vw;
   overflow: hidden;
-  position: fixed;
+  position: absolute;
   z-index: 1000;
 }
 
