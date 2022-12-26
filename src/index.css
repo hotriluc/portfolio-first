@@ -33,6 +33,7 @@ body {
     #a08bc4 80%,
     #7d74a1 97%
   );
+  /* background: radial-gradient(circle at bottom center, #212121 0%, #101010 80%); */
   color: #fafafa;
 
   overflow: hidden;
@@ -68,12 +69,12 @@ section {
 }
 
 .imgHolder {
-  width: 7px;
-  height: 7px;
-  background-color: red;
+  width: 8px;
+  height: 8px;
 }
 
 .imgHolder img {
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }

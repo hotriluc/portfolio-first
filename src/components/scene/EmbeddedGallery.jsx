@@ -4,9 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { computerActions } from '../../store/computer-slice';
 import { Flex } from '../../styles/Global';
 
-import { animated, useSpring } from '@react-spring/web';
+import { useSpring, useSpringRef } from '@react-spring/web';
+import {
+  DetailDescription,
+  DetailImage,
+  DetailTitle,
+  DetailWindow,
+} from '../../styles/Gallery';
 
-export const Project = (props) => {
+export const Project = ({ name, img }) => {
   return (
     <div
       style={{
@@ -16,30 +22,117 @@ export const Project = (props) => {
       }}
     >
       <div className="imgHolder">
-        <img src="./cat.avif" alt="" />
-        {props.img}
+        <img src={img} alt="" />
       </div>
-      <p>{props.name}.proj</p>
+      <p>{name}</p>
     </div>
+  );
+};
+
+const ProjectDetails = ({ name, description, img }) => {
+  const titleSpringRef = useSpringRef();
+  const titleSpring = useSpring({
+    ref: titleSpringRef,
+    from: { x: -2, opacity: 0 },
+    to: { x: 0, opacity: 1 },
+  });
+
+  const descriptionSpringRef = useSpringRef();
+  const descriptionSpring = useSpring({
+    ref: descriptionSpringRef,
+    from: { y: 4, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+  });
+
+  const imageSpringRef = useSpringRef();
+  const imageSpring = useSpring({
+    ref: imageSpringRef,
+    from: { y: 4, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+  });
+
+  useEffect(() => {
+    titleSpringRef.start({
+      from: { x: -2, opacity: 0 },
+      to: { x: 0, opacity: 1 },
+    });
+    imageSpringRef.start({
+      from: { y: -4, opacity: 0 },
+      to: { y: 0, opacity: 1 },
+    });
+    descriptionSpringRef.start({
+      from: { y: 4, opacity: 0 },
+      to: { y: 0, opacity: 1 },
+    });
+  }, [name, description, img]);
+
+  return (
+    <DetailWindow>
+      <DetailTitle style={{ ...titleSpring }}>{name}</DetailTitle>
+      <DetailDescription style={{ ...descriptionSpring }}>
+        {description}
+      </DetailDescription>
+      <DetailImage style={{ ...imageSpring }}>
+        <img src={img} />
+      </DetailImage>
+    </DetailWindow>
   );
 };
 
 const data = [
   [
-    { name: 'cat', img: './cat.avif', description: 'good cat' },
-    { name: 'dog', img: './cat.avif', description: 'good dog' },
-    { name: 'fish', img: './cat.avif', description: 'good fish' },
+    {
+      name: 'Cat',
+      img: './cat.avif',
+      description: 'Projects are still in progress. So check this cat',
+    },
+    {
+      name: 'Brown Husky',
+      img: './husky.avif',
+      description: 'Projects are still in progress. So check this brown husky.',
+    },
+    {
+      name: 'Snow Fox',
+      img: './fox.avif',
+      description: 'Projects are still in progress. So check this snow fox.',
+    },
   ],
   [
-    { name: 'f', img: './cat.avif' },
-    { name: 'f1', img: './cat.avif' },
-    { name: 'f2', img: './cat.avif' },
+    {
+      name: 'White Rabbit',
+      img: './rabbit.avif',
+      description:
+        'Projects are still in progress. So check this white rabbit.',
+    },
+    {
+      name: 'Red Panda',
+      img: './red_panda.avif',
+      description: 'Projects are still in progress. So check this red panda.',
+    },
+    {
+      name: 'Black Swan',
+      img: './black_swan.avif',
+      description: 'Projects are still in progress. So check this black swan.',
+    },
   ],
 
   [
-    { name: 'a1', img: './cat.avif' },
-    { name: 'a2', img: './cat.avif' },
-    { name: 'a3', img: './cat.avif' },
+    {
+      name: 'Sea Turtle',
+      img: './sea_turtle.avif',
+      description: 'Projects are still in progress. So check this sea turtle.',
+    },
+    {
+      name: 'Orange Parrot',
+      img: './orange_parrot.avif',
+      description:
+        'Projects are still in progress. So check this orange parrot.',
+    },
+    {
+      name: 'Cat',
+      img: './cat.avif',
+      description: 'Projects are still in progress. So check this cat',
+    },
   ],
 ];
 
@@ -122,7 +215,7 @@ const EmbeddedGallery = (props) => {
             <Flex
               key={`row-${rowIndex}`}
               gap={'.5rem'}
-              style={{ fontSize: 4 }}
+              style={{ fontSize: 2 }}
               alignCenter
               justifyCenter
             >
@@ -131,7 +224,7 @@ const EmbeddedGallery = (props) => {
                   <Project
                     key={`row-${rowIndex}-col-${colIndex}`}
                     name={item.name}
-                    image={item.image}
+                    img={item.img}
                   />
                 );
               })}
@@ -140,44 +233,6 @@ const EmbeddedGallery = (props) => {
         })}
       </Flex>
     </Html>
-  );
-};
-
-const ProjectDetails = ({ name, description, img }) => {
-  const spring = useSpring({
-    from: { x: -2, opacity: 0 },
-    to: { x: 0, opacity: 1 },
-  });
-
-  useEffect(() => {
-    console.log('data is changed');
-  }, [name]);
-
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        background: 'red',
-        width: 50,
-        zIndex: 12,
-        height: '100%',
-      }}
-    >
-      <animated.p style={{ ...spring }}>{name}</animated.p>
-      <p>{description}</p>
-      <div
-        style={{
-          height: 25,
-          width: 25,
-          position: 'absolute',
-          top: 10,
-          right: 0,
-          zIndex: -1,
-        }}
-      >
-        <img src={img} style={{ height: '100%', width: '100%' }} />
-      </div>
-    </div>
   );
 };
 

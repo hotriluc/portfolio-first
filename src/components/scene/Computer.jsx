@@ -111,12 +111,12 @@ const Computer = ({ portal }) => {
   const {
     computerColor,
     computerRoughness,
-    screenTransmission,
-    screenThickness,
-    screenRoughness,
-    screenClearcoat,
-    screenClearcoatRoughness,
-    screenIOR,
+    // screenTransmission,
+    // screenThickness,
+    // screenRoughness,
+    // screenClearcoat,
+    // screenClearcoatRoughness,
+    // screenIOR,
 
     accessoryColor,
     accessoryMetalness,
@@ -153,8 +153,9 @@ const Computer = ({ portal }) => {
         position={[-373.11, 380.27, -177.86]}
         rotation={[1.25, 0.45, 2.57]}
         scale={55.74}
+        material={materials.Dynamic}
       >
-        <meshPhysicalMaterial
+        {/* <meshPhysicalMaterial
           // color={"green"}
           transmission={screenTransmission}
           thickness={screenThickness}
@@ -162,7 +163,7 @@ const Computer = ({ portal }) => {
           clearcoat={screenClearcoat}
           clearcoatRoughness={screenClearcoatRoughness}
           ior={screenIOR}
-        />
+        /> */}
       </mesh>
 
       <mesh
