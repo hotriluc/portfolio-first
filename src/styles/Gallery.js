@@ -14,16 +14,16 @@ export const DetailWindow = styled.div`
   width: 65px;
   z-index: 12;
   height: 50px;
-  top: -4px;
+  top: -3px;
   left: 50%;
   transform: translateX(-50%);
   padding: 2px 5px;
 
   background: rgba(255, 255, 255, 0.9);
   border: 0.1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
+  border-radius: 1px;
 
-  & > * {
+  & > *:not(:last-child) {
     margin-bottom: 2px;
   }
 `;
@@ -69,5 +69,15 @@ export const DetailImage = styled(animated.div)`
     transform: scale(1.4);
     filter: none;
     -webkit-filter: none;
+  }
+`;
+
+export const DetailButton = styled(animated.button)`
+  border-style: none;
+  background-color: black;
+  color: white;
+  font-size: 8px;
+  a {
+    padding: 2px 4px;
   }
 `;

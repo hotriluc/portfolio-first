@@ -6,6 +6,7 @@ import { Flex } from '../../styles/Global';
 
 import { useSpring, useSpringRef } from '@react-spring/web';
 import {
+  DetailButton,
   DetailDescription,
   DetailImage,
   DetailTitle,
@@ -75,6 +76,15 @@ const ProjectDetails = ({ name, description, img }) => {
       <DetailImage style={{ ...imageSpring }}>
         <img src={img} />
       </DetailImage>
+      <DetailButton style={{ ...descriptionSpring }}>
+        <a
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View
+        </a>
+      </DetailButton>
     </DetailWindow>
   );
 };

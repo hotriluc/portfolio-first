@@ -60,6 +60,10 @@ section {
   height: 100vh;
 }
 
+button {
+  font-family: inherit;
+}
+
 .activeItem {
   border: 0.4px solid royalblue;
   /* padding: 1px; */
