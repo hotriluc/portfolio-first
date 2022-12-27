@@ -48,7 +48,7 @@ const Phone = () => {
     notificationRoughness,
     notificationMetalness,
   } = useControls('Phone', {
-    phoneBodyColor: '#ffc4c4',
+    phoneBodyColor: '#a08bc4',
     phoneBodyRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
     phoneBodyMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
 

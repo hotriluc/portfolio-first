@@ -86,22 +86,10 @@ const University = () => {
     guitarBodyColor,
     guitarBodyMetalness,
     guitarBodyRoughness,
-    bridgeColor,
-    bridgeRoughness,
-    bridgeMetalness,
-    somethingColor,
-    somethingRoughness,
-    somethingMetalness,
-    pickersColor,
-    pickersRoughness,
-    pickersMetalness,
+
     neckColor,
     neckRoughness,
     neckMetalness,
-
-    tunersColor,
-    tunersRoughness,
-    tunersMetalness,
 
     togglerColor,
     togglerMetalness,
@@ -111,29 +99,9 @@ const University = () => {
     guitarBodyRoughness: { min: 0, max: 1, step: 0.01, value: 0.1 },
     guitarBodyMetalness: { min: 0, max: 1, step: 0.01, value: 0.24 },
 
-    bridgeColor: '#ffd700',
-    bridgeRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
-    bridgeMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    somethingColor: '#ffd700',
-    somethingRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
-    somethingMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    pickersColor: '#ffd700',
-    pickersRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
-    pickersMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
     neckColor: '#653600',
     neckRoughness: { min: 0, max: 1, step: 0.01, value: 0.41 },
     neckMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    fretColor: '#3c2005',
-    fretRoughness: { min: 0, max: 1, step: 0.01, value: 1 },
-    fretMetalness: { min: 0, max: 1, step: 0.01, value: 0 },
-
-    tunersColor: '#ffd700',
-    tunersRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
-    tunersMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
 
     togglerColor: '#ffdfdf',
     togglerRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
@@ -426,24 +394,18 @@ const University = () => {
           <mesh
             name="Bridge"
             geometry={nodes.Bridge.geometry}
-            material={materials.Bridge}
+            material={materials.Toggler}
             position={[-0.81, 0.04, -0.15]}
             rotation={[-Math.PI / 2, 0, -Math.PI]}
             scale={[0.07, 0.04, 0.04]}
-            material-color={bridgeColor}
-            material-roughness={bridgeRoughness}
-            material-metalness={bridgeMetalness}
           />
           <mesh
             name="Cube006_1"
             geometry={nodes.Cube006_1.geometry}
-            material={materials.GuitarSomething}
+            material={materials.Toggler}
             position={[-0.27, 0.05, -0.14]}
             rotation={[0, 0, -1.58]}
             scale={[0.07, 0.08, 0.02]}
-            material-color={somethingColor}
-            material-roughness={somethingRoughness}
-            material-metalness={somethingMetalness}
           />
           <mesh
             name="Neck"
@@ -468,46 +430,34 @@ const University = () => {
             <mesh
               name="Lockers"
               geometry={nodes.Lockers.geometry}
-              material={materials.Lockers}
+              material={materials.Toggler}
               position={[20.91, -0.29, 0.84]}
               rotation={[1.6, -0.33, -1.51]}
               scale={[0.24, 0.36, 0.15]}
-              material-color={tunersColor}
-              material-roughness={tunersRoughness}
-              material-metalness={tunersMetalness}
             />
             <mesh
               name="Tuning_Posts"
               geometry={nodes.Tuning_Posts.geometry}
-              material={materials.Posts}
+              material={materials.Toggler}
               position={[19.85, 1.26, 0]}
               rotation={[-1.53, -1.17, -1.49]}
               scale={[0.19, 0.21, 0.19]}
-              material-color={tunersColor}
-              material-roughness={tunersRoughness}
-              material-metalness={tunersMetalness}
             />
           </mesh>
           <mesh
             name="Pickers"
             geometry={nodes.Pickers.geometry}
-            material={materials.Pickers}
+            material={materials.Toggler}
             position={[0.69, 0.04, -0.12]}
             scale={[1, 1, 0.79]}
-            material-color={pickersColor}
-            material-roughness={pickersRoughness}
-            material-metalness={pickersMetalness}
           />
           <mesh
             name="Regulators"
             geometry={nodes.Regulators.geometry}
-            material={materials.Regulators}
+            material={materials.Toggler}
             position={[-1.22, 0.8, -0.12]}
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[0.13, 0.06, 0.13]}
-            material-color={togglerColor}
-            material-roughness={togglerRoughness}
-            material-metalness={togglerMetalness}
           />
           <mesh
             name="Toggler"

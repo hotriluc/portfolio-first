@@ -26,14 +26,14 @@ body,
 body {
   font-family: 'Noto Serif Display', serif;
   background-color: #101010;
-  /* background: radial-gradient(
+  background: radial-gradient(
     circle at top left,
     #febfc7 0%,
     #d8a2c4 25%,
     #a08bc4 80%,
     #7d74a1 97%
-  ); */
-  background: radial-gradient(circle at bottom center, #212121 0%, #101010 80%);
+  );
+  /* background: radial-gradient(circle at bottom center, #212121 0%, #101010 80%); */
   color: #fbfbfb;
 
   overflow: hidden;

@@ -137,7 +137,7 @@ const Computer = ({ portal }) => {
 
     y: { value: 0, min: -1, max: 2, step: 0.01 },
 
-    accessoryColor: '#ffc4c4',
+    accessoryColor: '#febfc7',
     accessoryRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
     accessoryMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
 
