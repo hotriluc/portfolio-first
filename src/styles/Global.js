@@ -68,7 +68,8 @@ export const Quote = styled(animated.div)`
 `;
 
 export const Highlight = styled.span`
-  background-color: #a08bc4;
+  background-color: #fbfbfb;
+  color: #101010;
   padding: 0 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;

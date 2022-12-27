@@ -9,7 +9,7 @@ export const GalleryItem = styled.div`
 `;
 
 export const DetailWindow = styled.div`
-  color: black;
+  color: #101010;
   position: absolute;
   width: 65px;
   z-index: 12;
@@ -74,9 +74,11 @@ export const DetailImage = styled(animated.div)`
 
 export const DetailButton = styled(animated.button)`
   border-style: none;
-  background-color: black;
-  color: white;
+  background-color: #101010;
+  color: #fbfbfb;
   font-size: 8px;
+  position: absolute;
+
   a {
     padding: 2px 4px;
   }
