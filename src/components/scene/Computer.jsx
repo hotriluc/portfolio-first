@@ -54,6 +54,8 @@ const Joystick = ({ command, ...props }) => {
   const { nodes } = useGLTF('scene.glb');
   const dispatch = useDispatch();
 
+  console.log(nodes);
+
   /**
    * Animate joystick
    */
@@ -81,7 +83,17 @@ const Joystick = ({ command, ...props }) => {
         rotation={[0, 0, -0.19]}
         scale={[-0.9, -0.52, -0.14]}
       />
-      <group
+      <mesh
+        name="Joystick"
+        geometry={nodes.Joystick.geometry}
+        material={props.joystickMaterial}
+        position={[-1.2, 0.5, -0.62]}
+        scale={[0.3, 0.3, 0.08]}
+        ref={ref}
+        onPointerDown={toggleJoystickHandler}
+      />
+
+      {/* <group
         name="Joystick"
         position={[-1.2, 0.5, -0.62]}
         scale={[0.3, 0.3, 0.08]}
@@ -90,15 +102,15 @@ const Joystick = ({ command, ...props }) => {
         <mesh
           name="Sphere001"
           geometry={nodes.Sphere001.geometry}
-          material={props.joystickMaterial}
+          // material={props.joystickMaterial}
           onPointerDown={toggleJoystickHandler}
         />
         <mesh
           name="Sphere001_1"
           geometry={nodes.Sphere001_1.geometry}
-          material={props.joystickMaterial}
+          // material={props.joystickMaterial}
         />
-      </group>
+      </group> */}
     </>
   );
 };
@@ -153,7 +165,7 @@ const Computer = ({ portal }) => {
         position={[-373.11, 380.27, -177.86]}
         rotation={[1.25, 0.45, 2.57]}
         scale={55.74}
-        material={materials.Dynamic}
+        material={materials.ComputerAccessories}
       >
         {/* <meshPhysicalMaterial
           // color={"green"}
@@ -188,7 +200,7 @@ const Computer = ({ portal }) => {
         <mesh
           name="Dynamic"
           geometry={nodes.Dynamic.geometry}
-          material={materials.Dynamic}
+          material={materials.ComputerAccessories}
           position={[0, -1.05, -0.96]}
           scale={[1.04, 1, 1]}
           material-color={accessoryColor}
@@ -265,7 +277,7 @@ const Computer = ({ portal }) => {
           <Joystick
             command={'OPEN'}
             holderMaterial={materials.Keycap}
-            joystickMaterial={materials.Dynamic}
+            joystickMaterial={materials.ComputerAccessories}
           />
           {/* <group
             name="Joystick"
@@ -276,12 +288,12 @@ const Computer = ({ portal }) => {
             <mesh
               name="Sphere001"
               geometry={nodes.Sphere001.geometry}
-              material={materials.Dynamic}
+              material={materials.ComputerAccessories}
             />
             <mesh
               name="Sphere001_1"
               geometry={nodes.Sphere001_1.geometry}
-              material={materials.Dynamic}
+              material={materials.ComputerAccessories}
             />
           </group>{' '} */}
 
@@ -309,7 +321,7 @@ const Computer = ({ portal }) => {
           <mesh
             name="Switches"
             geometry={nodes.Switches.geometry}
-            material={materials.Dynamic}
+            material={materials.ComputerAccessories}
             position={[-0.49, 0.61, 0.59]}
             rotation={[0, 0, -0.19]}
             scale={[0.43, 0.38, 0.11]}

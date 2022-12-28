@@ -196,7 +196,7 @@ const University = () => {
         <mesh
           name="Roof"
           geometry={nodes.Roof.geometry}
-          material={materials.Roof}
+          material={materials.Divider}
           position={[-17.85, 182.52, -1.25]}
           scale={[27.94, 14.69, 28.79]}
           material-color={dividerColor}
@@ -394,7 +394,7 @@ const University = () => {
           <mesh
             name="Bridge"
             geometry={nodes.Bridge.geometry}
-            material={materials.Toggler}
+            material={materials.GuitarAccessories}
             position={[-0.81, 0.04, -0.15]}
             rotation={[-Math.PI / 2, 0, -Math.PI]}
             scale={[0.07, 0.04, 0.04]}
@@ -402,7 +402,7 @@ const University = () => {
           <mesh
             name="Cube006_1"
             geometry={nodes.Cube006_1.geometry}
-            material={materials.Toggler}
+            material={materials.GuitarAccessories}
             position={[-0.27, 0.05, -0.14]}
             rotation={[0, 0, -1.58]}
             scale={[0.07, 0.08, 0.02]}
@@ -430,7 +430,7 @@ const University = () => {
             <mesh
               name="Lockers"
               geometry={nodes.Lockers.geometry}
-              material={materials.Toggler}
+              material={materials.GuitarAccessories}
               position={[20.91, -0.29, 0.84]}
               rotation={[1.6, -0.33, -1.51]}
               scale={[0.24, 0.36, 0.15]}
@@ -438,7 +438,7 @@ const University = () => {
             <mesh
               name="Tuning_Posts"
               geometry={nodes.Tuning_Posts.geometry}
-              material={materials.Toggler}
+              material={materials.GuitarAccessories}
               position={[19.85, 1.26, 0]}
               rotation={[-1.53, -1.17, -1.49]}
               scale={[0.19, 0.21, 0.19]}
@@ -447,14 +447,14 @@ const University = () => {
           <mesh
             name="Pickers"
             geometry={nodes.Pickers.geometry}
-            material={materials.Toggler}
+            material={materials.GuitarAccessories}
             position={[0.69, 0.04, -0.12]}
             scale={[1, 1, 0.79]}
           />
           <mesh
             name="Regulators"
             geometry={nodes.Regulators.geometry}
-            material={materials.Toggler}
+            material={materials.GuitarAccessories}
             position={[-1.22, 0.8, -0.12]}
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[0.13, 0.06, 0.13]}
@@ -462,7 +462,7 @@ const University = () => {
           <mesh
             name="Toggler"
             geometry={nodes.Toggler.geometry}
-            material={materials.Toggler}
+            material={materials.GuitarAccessories}
             position={[1.53, -0.71, -0.11]}
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[0.13, 0.05, 0.13]}

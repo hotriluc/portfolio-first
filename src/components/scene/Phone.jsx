@@ -1,11 +1,68 @@
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
-import { useRef } from 'react';
+import { easing } from 'maath';
+import { useEffect, useRef, useState } from 'react';
 
 const Phone = () => {
-  const phoneRef = useRef();
   const { nodes, materials } = useGLTF('scene.glb');
+
+  const phoneRef = useRef();
+  const gitRef = useRef();
+  const emailRef = useRef();
+  const linkedRef = useRef();
+
+  const [hovered, setHovered] = useState(false);
+  const [gitIsPressed, setGitIsPressed] = useState(false);
+  const [emailIsPressed, setEmailIsPressed] = useState(false);
+  const [linkedIsPressed, setLinkedIsPressed] = useState(false);
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+  }, [hovered]);
+
+  useFrame((state, delta) => {
+    const et = state.clock.elapsedTime;
+
+    // phone animation
+    phoneRef.current.position.y = Math.sin(et * 0.7 + 1 * 3000) * 4;
+    phoneRef.current.children[0].rotation.z =
+      0.5 + Math.cos(et * 0.4 + 3000) / 2.5;
+
+    // icons animation
+    easing.damp3(
+      gitRef.current.position,
+      [
+        gitRef.current.position.x,
+        gitIsPressed ? -2 : -3,
+        gitRef.current.position.z,
+      ],
+      0.1,
+      delta
+    );
+
+    easing.damp3(
+      emailRef.current.position,
+      [
+        emailRef.current.position.x,
+        emailIsPressed ? -2 : -3,
+        emailRef.current.position.z,
+      ],
+      0.1,
+      delta
+    );
+
+    easing.damp3(
+      linkedRef.current.position,
+      [
+        linkedRef.current.position.x,
+        linkedIsPressed ? -2 : -3,
+        linkedRef.current.position.z,
+      ],
+      0.1,
+      delta
+    );
+  });
 
   const {
     phoneBodyColor,
@@ -89,14 +146,6 @@ const Phone = () => {
     notificationMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
   });
 
-  useFrame((state) => {
-    const et = state.clock.elapsedTime;
-
-    phoneRef.current.position.y = Math.sin(et * 0.7 + 1 * 3000) * 4;
-    phoneRef.current.children[0].rotation.z =
-      0.5 + Math.cos(et * 0.4 + 3000) / 2.5;
-  });
-
   return (
     <group ref={phoneRef}>
       <mesh
@@ -129,6 +178,7 @@ const Phone = () => {
         >
           <mesh
             name="EmailIcon"
+            ref={emailRef}
             geometry={nodes.EmailIcon.geometry}
             material={materials.Envelope}
             position={[0.53, -2.05, -0.65]}
@@ -137,6 +187,17 @@ const Phone = () => {
             material-color={mailIconColor}
             material-roughness={mailIconRoughness}
             material-metalness={mailIconMetalness}
+            onPointerDown={() => {
+              setEmailIsPressed(true);
+            }}
+            onPointerUp={() => setEmailIsPressed(false)}
+            onPointerLeave={() => setEmailIsPressed(false)}
+            onPointerOver={() => {
+              setHovered(true);
+            }}
+            onPointerOut={() => {
+              setHovered(false);
+            }}
           >
             <mesh
               name="EmailText"
@@ -151,19 +212,31 @@ const Phone = () => {
             />
           </mesh>
           <mesh
+            ref={gitRef}
             name="GitHubIcon"
             geometry={nodes.GitHubIcon.geometry}
             material={materials.GitHubBody}
-            position={[-0.52, -2.03, -0.65]}
+            position={[-0.52, -5, -0.65]}
             scale={[-0.18, -2.7, -0.1]}
             material-color={gitHubIconColor}
             material-roughness={gitHubIconRoughness}
             material-metalness={gitHubIconMetalness}
+            onPointerDown={() => {
+              setGitIsPressed(true);
+            }}
+            onPointerUp={() => setGitIsPressed(false)}
+            onPointerLeave={() => setGitIsPressed(false)}
+            onPointerOver={() => {
+              setHovered(true);
+            }}
+            onPointerOut={() => {
+              setHovered(false);
+            }}
           >
             <mesh
               name="GithubCat"
-              geometry={nodes.GithubCat.geometry}
-              material={materials.GithubCat}
+              geometry={nodes.GitHubText.geometry}
+              material={materials.GitHubText}
               position={[0.02, 0.25, 0.04]}
               scale={[0.07, 0.05, 0.07]}
               material-color={gitHubIconTextColor}
@@ -171,19 +244,10 @@ const Phone = () => {
               material-metalness={gitHubIconTextMetalness}
             />
           </mesh>
-          <mesh
-            name="ImageHolder"
-            geometry={nodes.ImageHolder.geometry}
-            material={materials.ImageHolder}
-            position={[0, -2.24, 0.02]}
-            rotation={[Math.PI, 0, Math.PI]}
-            scale={[-0.62, -0.49, -0.34]}
-            material-color={imageColor}
-            material-roughness={imageRoughness}
-            material-metalness={imageMetalness}
-          />
+
           <mesh
             name="LinkedIcon"
+            ref={linkedRef}
             geometry={nodes.LinkedIcon.geometry}
             material={materials.LinkedBody}
             position={[0, -2.05, -0.65]}
@@ -192,6 +256,17 @@ const Phone = () => {
             material-color={linkedIconColor}
             material-roughness={linkedIconRoughness}
             material-metalness={linkedIconMetalness}
+            onPointerDown={() => {
+              setLinkedIsPressed(true);
+            }}
+            onPointerUp={() => setLinkedIsPressed(false)}
+            onPointerLeave={() => setLinkedIsPressed(false)}
+            onPointerOver={() => {
+              setHovered(true);
+            }}
+            onPointerOut={() => {
+              setHovered(false);
+            }}
           >
             <mesh
               name="LinkedText"
@@ -205,6 +280,18 @@ const Phone = () => {
               material-metalness={linkedIconTextMetalness}
             />
           </mesh>
+
+          <mesh
+            name="ImageHolder"
+            geometry={nodes.ImageHolder.geometry}
+            material={materials.ImageHolder}
+            position={[0, -2.24, 0.02]}
+            rotation={[Math.PI, 0, Math.PI]}
+            scale={[-0.62, -0.49, -0.34]}
+            material-color={imageColor}
+            material-roughness={imageRoughness}
+            material-metalness={imageMetalness}
+          />
           <mesh
             name="Notification"
             geometry={nodes.Notification.geometry}
