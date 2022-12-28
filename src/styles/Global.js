@@ -41,6 +41,13 @@ export const Flex = styled.div`
 export const Section = styled.section`
   height: ${(props) => props.height || '100vh'};
   padding: ${(props) => props.padding || '10rem 4rem 0 calc(160px + 2rem)'};
+
+  @media (max-width: 992px) {
+    padding: 5rem;
+  }
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 export const Quote = styled(animated.div)`
