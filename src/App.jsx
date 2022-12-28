@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <div ref={domRef}></div>
-      <CustomLoader text={'Hello'}></CustomLoader>
+      <CustomLoader text={'Welcome'} timeOut={1.2} />
 
       <Canvas className="canvas" dpr={[1, 2]}>
         <Perf position="top-left" />

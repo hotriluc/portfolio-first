@@ -18,7 +18,7 @@ const CustomLoader = ({ text, timeOut }) => {
     ref: trailRef,
     from: {
       opacity: 0,
-      y: -60,
+      y: -40,
     },
     to: {
       opacity: 1,

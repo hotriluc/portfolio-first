@@ -7,7 +7,14 @@ export const LoaderBox = styled(animated.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #7d74a1;
+  background: linear-gradient(
+    to top,
+    #a08bc4 0%,
+    #febfc7 30%,
+    #d8a2c4 55%,
+    #7d74a1 97%
+  );
+
   font-size: 10rem;
   // opacity: 0.3,
   position: absolute;
