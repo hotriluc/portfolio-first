@@ -1,10 +1,12 @@
-import { Html } from '@react-three/drei';
+import { Flex } from '../../styles/Global';
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { computerActions } from '../../store/computer-slice';
-import { Flex } from '../../styles/Global';
 
 import { useSpring, useSpringRef } from '@react-spring/web';
+import { Html } from '@react-three/drei';
+
 import {
   DetailButton,
   DetailDescription,

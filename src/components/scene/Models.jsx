@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { useRef, useEffect } from 'react';
+
+import { useFrame } from '@react-three/fiber';
 import {
   useGLTF,
   PerspectiveCamera,
@@ -7,38 +9,11 @@ import {
   useScroll,
 } from '@react-three/drei';
 
-import { useFrame } from '@react-three/fiber';
-import { useControls } from 'leva';
-
 import Computer from './Computer';
 import Phone from './Phone';
 import University from './University';
 
 export function Models(props) {
-  const {
-    trainColor,
-    trainMetalness,
-    trainRoughness,
-    trainWindowColor,
-    trainWindowMetalness,
-    trainWindowRoughness,
-    trainJointColor,
-    trainJointMetalness,
-    trainJointRoughness,
-  } = useControls('Train', {
-    trainColor: '#ffffff',
-    trainRoughness: { min: 0, max: 1, step: 0.01, value: 0.15 },
-    trainMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    trainWindowColor: '#d8a2c4',
-    trainWindowRoughness: { min: 0, max: 1, step: 0.01, value: 0.13 },
-    trainWindowMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    trainJointColor: '#141414',
-    trainJointRoughness: { min: 0, max: 1, step: 0.01, value: 0.55 },
-    trainJointMetalness: { min: 0, max: 1, step: 0.01, value: 0 },
-  });
-
   const group = useRef();
 
   const { nodes, materials, animations } = useGLTF('/scene.glb');
@@ -99,17 +74,17 @@ export function Models(props) {
                       position={[0.04, -0.01, 0.12]}
                       rotation={[Math.PI, 0, Math.PI]}
                       scale={[0.68, 0.68, 1.02]}
-                      material-color={trainColor}
-                      material-roughness={trainRoughness}
-                      material-metalness={trainMetalness}
+                      material-color={'#fafafa'}
+                      material-roughness={0.15}
+                      material-metalness={1}
                     >
                       <mesh
                         name="BackWindows"
                         geometry={nodes.BackWindows.geometry}
                         material={materials.TrainWindow}
-                        material-color={trainWindowColor}
-                        material-roughness={trainWindowRoughness}
-                        material-metalness={trainWindowMetalness}
+                        material-color={'#d8a2c4'}
+                        material-roughness={0.13}
+                        material-metalness={1}
                       />
                     </mesh>
                   </group>
@@ -119,6 +94,8 @@ export function Models(props) {
                     material={materials.TrainJoint}
                     position={[0.04, -0.1, 0.15]}
                     scale={[0.73, 0.73, 14.17]}
+                    material-color={'#141414'}
+                    material-roughness={0.55}
                   />
                 </group>
                 <mesh
@@ -141,9 +118,6 @@ export function Models(props) {
                 material={materials.TrainJoint}
                 position={[0.04, -0.08, 0.01]}
                 scale={[0.73, 0.73, 14.17]}
-                material-color={trainJointColor}
-                material-roughness={trainJointRoughness}
-                material-metalness={trainJointMetalness}
               />
             </group>
             <mesh

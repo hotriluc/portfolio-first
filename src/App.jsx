@@ -1,15 +1,15 @@
-import { Environment, Scroll, ScrollControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
-import Models from './components/scene/Models';
 import { Suspense, useRef } from 'react';
-// import CustomLoader from './components/ui/CustomLoader';
+import { useSelector } from 'react-redux';
+
+import { Canvas } from '@react-three/fiber';
+import { Environment, Scroll, ScrollControls } from '@react-three/drei';
+
+import Models from './components/scene/Models';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Works from './components/sections/Works';
 import Contacts from './components/sections/Contacts';
-import { Perf } from 'r3f-perf';
 import CustomLoader from './components/UI/CustomLoader';
-import { useSelector } from 'react-redux';
 
 function App() {
   const domRef = useRef();
@@ -21,17 +21,15 @@ function App() {
       <CustomLoader text={'Welcome'} timeOut={1.2} />
 
       <Canvas className="canvas" dpr={[1, 2]}>
-        <Perf position="top-left" />
-
         <ambientLight intensity={1} />
 
         <ScrollControls
           // style={{ zIndex: 1 }}
-          pages={5} // Each page takes 100% of the height of the canvas
-          distance={1} // A factor that increases scroll bar travel (default: 1)
-          damping={20} // Friction, higher is faster (default: 4)
-          horizontal={false} // Can also scroll horizontally (default: false)
-          infinite={false} // Can also scroll infinitely (default: false)
+          pages={5}
+          distance={1}
+          damping={20}
+          horizontal={false}
+          infinite={false}
         >
           <Scroll>
             <Suspense fallback={null}>

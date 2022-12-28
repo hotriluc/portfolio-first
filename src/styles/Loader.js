@@ -9,10 +9,10 @@ export const LoaderBox = styled(animated.div)`
   align-items: center;
   background: linear-gradient(
     to top,
-    #a08bc4 0%,
-    #febfc7 30%,
-    #d8a2c4 55%,
-    #7d74a1 97%
+    #7d74a1 0%,
+    #d8a2c4 17%,
+    #febfc7 33%,
+    #a08bc4 97%
   );
 
   font-size: 10rem;

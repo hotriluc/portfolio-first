@@ -1,10 +1,11 @@
-import { useGLTF } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
-import { useControls } from 'leva';
-import { easing } from 'maath';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { computerActions } from '../../store/computer-slice';
+
+import { useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { easing } from 'maath';
+
 import EmbeddedGallery from './EmbeddedGallery';
 
 const Key = ({ which, command, ...props }) => {
@@ -138,43 +139,6 @@ const Computer = ({ portal }) => {
   const computerBodyRef = useRef();
   const { nodes, materials } = useGLTF('scene.glb');
 
-  const {
-    computerColor,
-    computerRoughness,
-    // screenTransmission,
-    // screenThickness,
-    // screenRoughness,
-    // screenClearcoat,
-    // screenClearcoatRoughness,
-    // screenIOR,
-
-    accessoryColor,
-    accessoryMetalness,
-    accessoryRoughness,
-
-    keyCapColor,
-    keyCapRoughness,
-  } = useControls('Computer', {
-    computerColor: '#1a1a1a',
-    computerRoughness: { min: 0, max: 1, step: 0.01, value: 0.12 },
-
-    screenTransmission: { min: 0, max: 1, step: 0.01, value: 1 },
-    screenThickness: { value: 0, min: 0, max: 20 },
-    screenRoughness: { min: 0, max: 1, step: 0.01, value: 0 },
-    screenClearcoat: { value: 1, min: 0, max: 1, step: 0 },
-    screenClearcoatRoughness: { value: 0.2, min: 0, max: 1, step: 0 },
-    screenIOR: { value: 1, min: 1, max: 2.3, step: 0.05 },
-
-    y: { value: 0, min: -1, max: 2, step: 0.01 },
-
-    accessoryColor: '#febfc7',
-    accessoryRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
-    accessoryMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    keyCapColor: '#100b0b',
-    keyCapRoughness: { min: 0, max: 1, step: 0.01, value: 0.62 },
-  });
-
   return (
     <group ref={computerRef}>
       <mesh
@@ -203,8 +167,8 @@ const Computer = ({ portal }) => {
         position={[-373.11, 380.27, -177.87]}
         rotation={[1.25, 0.45, 2.57]}
         scale={55.74}
-        material-color={computerColor}
-        material-roughness={computerRoughness}
+        material-color={'#1a1a1a'}
+        material-roughness={0.12}
         ref={computerBodyRef}
       >
         <EmbeddedGallery
@@ -221,9 +185,9 @@ const Computer = ({ portal }) => {
           material={materials.ComputerAccessories}
           position={[0, -1.05, -0.96]}
           scale={[1.04, 1, 1]}
-          material-color={accessoryColor}
-          material-roughness={accessoryRoughness}
-          material-metalness={accessoryMetalness}
+          material-color={'#febfc7'}
+          material-roughness={0.14}
+          material-metalness={1}
         />
 
         <mesh
@@ -250,8 +214,8 @@ const Computer = ({ portal }) => {
             position={[-0.38, 1.2, 0.59]}
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
-            material-color={keyCapColor}
-            material-roughness={keyCapRoughness}
+            material-color={'#100b0b'}
+            material-roughness={0.62}
           />
           <Key
             command={'RIGHT'}
@@ -291,30 +255,11 @@ const Computer = ({ portal }) => {
             rotation={[0, 0, 0]}
             scale={[0.6, 0.66, 0.12]}
           />
-
           <Joystick
             command={'OPEN'}
             holderMaterial={materials.Keycap}
             joystickMaterial={materials.ComputerAccessories}
           />
-          {/* <group
-            name="Joystick"
-            position={[-1.2, 0.5, -0.62]}
-            scale={[0.3, 0.3, 0.08]}
-            // rotation-z={-0.4}
-          >
-            <mesh
-              name="Sphere001"
-              geometry={nodes.Sphere001.geometry}
-              material={materials.ComputerAccessories}
-            />
-            <mesh
-              name="Sphere001_1"
-              geometry={nodes.Sphere001_1.geometry}
-              material={materials.ComputerAccessories}
-            />
-          </group>{' '} */}
-
           <group
             name="Platte"
             position={[-1.96, 0.5, 0]}
@@ -325,16 +270,6 @@ const Computer = ({ portal }) => {
               geometry={nodes.Cube043.geometry}
               material={materials.Computer}
             />
-            {/* <mesh
-          name="Cube043_1"
-          geometry={nodes.Cube043_1.geometry}
-          material={materials.Keyboard}
-        />
-        <mesh
-          name="Cube043_2"
-          geometry={nodes.Cube043_2.geometry}
-          material={materials.Keyboard}
-        /> */}
           </group>
           <mesh
             name="Switches"

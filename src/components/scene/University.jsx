@@ -1,6 +1,5 @@
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useControls } from 'leva';
 import { useRef } from 'react';
 
 const University = () => {
@@ -22,124 +21,6 @@ const University = () => {
     }
   });
 
-  const {
-    buildingColor,
-    buildingRoughness,
-    buildingMetalness,
-    dividerColor,
-    dividerRoughness,
-    dividerMetalness,
-    columnsColor,
-    columnsRoughness,
-    columnsMetalness,
-    buildingWindowColor,
-    buildingWindowRoughness,
-    buildingWindowMetalness,
-  } = useControls('University', {
-    buildingColor: '#820000',
-    buildingRoughness: { min: 0, max: 1, step: 0.01, value: 0.22 },
-    buildingMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-    dividerColor: '#211b1b',
-    dividerRoughness: { min: 0, max: 1, step: 0.01, value: 0.33 },
-    dividerMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    columnsColor: '#690f31',
-    columnsRoughness: { min: 0, max: 1, step: 0.01, value: 0 },
-    columnsMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    buildingWindowColor: '#FEBFC7',
-    buildingWindowRoughness: { min: 0, max: 1, step: 0.01, value: 0.13 },
-    buildingWindowMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-  });
-
-  const {
-    bodyColor,
-    bodyRoughness,
-    bodyMetalness,
-    eyesColor,
-    eyesRoughness,
-    eyesMetalness,
-    mouthColor,
-    mouthRoughness,
-    mouthMetalness,
-  } = useControls('Bunny', {
-    bodyColor: '#fcfcfc',
-    bodyRoughness: { min: 0, max: 1, step: 0.01, value: 0.75 },
-    bodyMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-    eyesColor: '#ff3d77',
-    eyesRoughness: { min: 0, max: 1, step: 0.01, value: 0.37 },
-    eyesMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-    mouthColor: '#413434',
-    mouthRoughness: { min: 0, max: 1, step: 0.01, value: 0.6 },
-    mouthMetalness: { min: 0, max: 1, step: 0.01, value: 0 },
-  });
-
-  const { snakeColor, snake1Color, snakeMetalness, snakeRoughness } =
-    useControls('Snake', {
-      snakeColor: '#4584b6',
-      snake1Color: '#ffde57',
-      snakeRoughness: { min: 0, max: 1, step: 0.01, value: 0.5 },
-      snakeMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-    });
-
-  const {
-    guitarBodyColor,
-    guitarBodyMetalness,
-    guitarBodyRoughness,
-
-    neckColor,
-    neckRoughness,
-    neckMetalness,
-
-    togglerColor,
-    togglerMetalness,
-    togglerRoughness,
-  } = useControls('Guitar', {
-    guitarBodyColor: '#ffffff',
-    guitarBodyRoughness: { min: 0, max: 1, step: 0.01, value: 0.1 },
-    guitarBodyMetalness: { min: 0, max: 1, step: 0.01, value: 0.24 },
-
-    neckColor: '#653600',
-    neckRoughness: { min: 0, max: 1, step: 0.01, value: 0.41 },
-    neckMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    togglerColor: '#ffdfdf',
-    togglerRoughness: { min: 0, max: 1, step: 0.01, value: 0.14 },
-    togglerMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-  });
-
-  const {
-    stairsColor,
-    stairsMetalness,
-    stairsRoughness,
-    standsColor,
-    standsMetalness,
-    standsRoughness,
-
-    landColor,
-    landMetalness,
-    landRoughness,
-
-    arcColor,
-    arcMetalness,
-    arcRoughness,
-  } = useControls('Scene', {
-    stairsColor: '#ffc4c4',
-    stairsRoughness: { min: 0, max: 1, step: 0.01, value: 0.69 },
-    stairsMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    standsColor: '#ffebf3',
-    standsRoughness: { min: 0, max: 1, step: 0.01, value: 0.33 },
-    standsMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    landColor: '#ffc4c4',
-    landRoughness: { min: 0, max: 1, step: 0.01, value: 0.69 },
-    landMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-
-    arcColor: '#ffebf3',
-    arcRoughness: { min: 0, max: 1, step: 0.01, value: 0.5 },
-    arcMetalness: { min: 0, max: 1, step: 0.01, value: 1 },
-  });
   return (
     <>
       <group name="University">
@@ -149,9 +30,9 @@ const University = () => {
           material={materials.Divider}
           position={[-41.91, 42.77, -1.25]}
           scale={[27.94, 14.69, 28.79]}
-          material-color={dividerColor}
-          material-roughness={dividerRoughness}
-          material-metalness={dividerMetalness}
+          material-color={'#211b1b'}
+          material-roughness={0.33}
+          material-metalness={1}
         />
 
         <mesh
@@ -160,17 +41,17 @@ const University = () => {
           material={materials.Building}
           position={[-41.91, 91.08, -1.25]}
           scale={[27.94, 14.69, 28.79]}
-          material-color={buildingColor}
-          material-roughness={buildingRoughness}
-          material-metalness={buildingMetalness}
+          material-color={'#820000'}
+          material-roughness={0.22}
+          material-metalness={1}
         >
           <mesh
             name="FirstFloorWindows"
             geometry={nodes.FirstFloorWindows.geometry}
             material={materials.BuildingWindow}
-            material-color={buildingWindowColor}
-            material-roughness={buildingWindowRoughness}
-            material-metalness={buildingWindowMetalness}
+            material-color={'#ffd1fe'}
+            material-roughness={0.13}
+            material-metalness={1}
           />
         </mesh>
         <mesh
@@ -192,6 +73,9 @@ const University = () => {
           material={materials.Divider}
           position={[-41.91, 90.42, -1.25]}
           scale={[27.94, 14.69, 28.79]}
+          material-color={'#211b1b'}
+          material-roughness={0.33}
+          material-metalness={1}
         />
         <mesh
           name="Roof"
@@ -199,9 +83,6 @@ const University = () => {
           material={materials.Divider}
           position={[-17.85, 182.52, -1.25]}
           scale={[27.94, 14.69, 28.79]}
-          material-color={dividerColor}
-          material-roughness={dividerRoughness}
-          material-metalness={dividerMetalness}
         />
         <mesh
           name="Columns"
@@ -210,9 +91,9 @@ const University = () => {
           position={[26.32, 147.08, -1.25]}
           rotation={[-Math.PI, 0, -Math.PI]}
           scale={[-3.83, -30.01, -3.83]}
-          material-color={columnsColor}
-          material-roughness={columnsRoughness}
-          material-metalness={columnsMetalness}
+          material-color={'#690f31'}
+          material-roughness={0}
+          material-metalness={1}
         />
       </group>
 
@@ -223,25 +104,22 @@ const University = () => {
           material={materials.Land}
           position={[40.24, 33.01, -1.25]}
           scale={[73.56, 33.19, 126.2]}
-          material-color={landColor}
-          material-roughness={landRoughness}
-          material-metalness={landMetalness}
+          material-color={'#ffc4c4'}
+          material-roughness={0.69}
+          material-metalness={1}
         />
         <mesh
           name="Stairs"
           geometry={nodes.Stairs.geometry}
-          material={materials.Stairs}
+          material={materials.Land}
           position={[54.57, 53.42, 27.17]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={[17.99, 12.04, 12.04]}
-          material-color={stairsColor}
-          material-roughness={stairsRoughness}
-          material-metalness={stairsMetalness}
         />
         <mesh
           name="Stairs001"
           geometry={nodes.Stairs001.geometry}
-          material={materials.Stairs}
+          material={materials.Land}
           position={[111.05, 40.53, -65.44]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={[17.99, 8.18, 12.04]}
@@ -249,7 +127,7 @@ const University = () => {
         <mesh
           name="Stairs002"
           geometry={nodes.Stairs002.geometry}
-          material={materials.Stairs}
+          material={materials.Land}
           position={[124.91, 28.14, 72.64]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={[17.99, 12.04, 12.04]}
@@ -261,9 +139,9 @@ const University = () => {
           material={materials.Arc}
           position={[222.1, 64.3, 87.21]}
           scale={[51.06, 41.73, 29.81]}
-          material-color={arcColor}
-          material-roughness={arcRoughness}
-          material-metalness={arcMetalness}
+          material-color={'#ffebf3'}
+          material-roughness={0.5}
+          material-metalness={1}
         />
 
         <mesh
@@ -273,9 +151,9 @@ const University = () => {
           position={[74.51, 56.8, 85.02]}
           rotation={[-Math.PI, 0, -Math.PI]}
           scale={11.08}
-          material-color={standsColor}
-          material-roughness={standsRoughness}
-          material-metalness={standsMetalness}
+          material-color={'#ffebf3'}
+          material-roughness={0.33}
+          material-metalness={1}
         />
 
         <mesh
@@ -304,9 +182,9 @@ const University = () => {
         position={[82.63, 91.55, -101.97]}
         rotation={[-Math.PI, 0, Math.PI / 2]}
         scale={[9.31, 10.72, 10.72]}
-        material-color={bodyColor}
-        material-roughness={bodyRoughness}
-        material-metalness={bodyMetalness}
+        material-color={'#fcfcfc'}
+        material-roughness={0.75}
+        material-metalness={1}
       >
         <mesh
           name="Bod"
@@ -339,9 +217,9 @@ const University = () => {
           position={[0.2, -0.14, 0.45]}
           rotation={[0, 0, Math.PI / 2]}
           scale={[0.13, 0.15, 0.13]}
-          material-color={eyesColor}
-          material-roughness={eyesRoughness}
-          material-metalness={eyesMetalness}
+          material-color={'#ff3d77'}
+          material-roughness={0.37}
+          material-metalness={1}
         />
         <mesh
           name="Mouth"
@@ -350,9 +228,9 @@ const University = () => {
           position={[0.24, -0.22, 0.02]}
           rotation={[-0.17, 0.26, 1.73]}
           scale={[0.19, 0.21, 0.19]}
-          material-color={mouthColor}
-          material-roughness={mouthRoughness}
-          material-metalness={mouthMetalness}
+          material-color={'#413434'}
+          material-roughness={0.6}
+          material-metalness={1}
         />
       </mesh>
 
@@ -364,17 +242,17 @@ const University = () => {
           position={[74.51, 85.46, 84.25]}
           rotation={[Math.PI / 2, 0, -Math.PI / 2]}
           scale={3.51}
-          material-color={snake1Color}
-          material-roughness={snakeRoughness}
-          material-metalness={snakeMetalness}
+          material-color={'#ffde57'}
+          material-roughness={0.5}
+          material-metalness={1}
         >
           <mesh
             name="Snake"
             geometry={nodes.Snake.geometry}
             material={materials.Snake}
-            material-color={snakeColor}
-            material-roughness={snakeRoughness}
-            material-metalness={snakeMetalness}
+            material-color={'#4584b6'}
+            material-roughness={0.5}
+            material-metalness={1}
           />
         </mesh>
       </group>
@@ -387,9 +265,9 @@ const University = () => {
           position={[131.27, 73.79, -25.17]}
           rotation={[0.2, -0.5, 1.58]}
           scale={[5.45, 5.45, 9.02]}
-          material-color={guitarBodyColor}
-          material-roughness={guitarBodyRoughness}
-          material-metalness={guitarBodyMetalness}
+          material-color={'#fafafa'}
+          material-roughness={0.1}
+          material-metalness={0.24}
         >
           <mesh
             name="Bridge"
@@ -398,6 +276,9 @@ const University = () => {
             position={[-0.81, 0.04, -0.15]}
             rotation={[-Math.PI / 2, 0, -Math.PI]}
             scale={[0.07, 0.04, 0.04]}
+            material-color={'#febfc7'}
+            material-roughness={0.14}
+            material-metalness={1}
           />
           <mesh
             name="Cube006_1"
@@ -414,9 +295,9 @@ const University = () => {
             position={[2.01, 0.02, 0.08]}
             rotation={[-1.57, 0.01, -0.01]}
             scale={[0.27, 0.15, 0.27]}
-            material-color={neckColor}
-            material-roughness={neckRoughness}
-            material-metalness={neckMetalness}
+            material-color={'#653600'}
+            material-roughness={0.41}
+            material-metalness={1}
           >
             {/* <mesh
                 name="Fret"
@@ -466,9 +347,6 @@ const University = () => {
             position={[1.53, -0.71, -0.11]}
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[0.13, 0.05, 0.13]}
-            material-color={togglerColor}
-            material-roughness={togglerRoughness}
-            material-metalness={togglerMetalness}
           />
         </mesh>
       </group>
