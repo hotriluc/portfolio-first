@@ -78,6 +78,7 @@ export const DetailButton = styled(animated.button)`
   color: #fbfbfb;
   font-size: 8px;
   position: absolute;
+  bottom: -3px;
 
   a {
     padding: 2px 4px;

@@ -20,6 +20,7 @@ export const Project = ({ name, img }) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        gap: 1,
       }}
     >
       <div className="imgHolder">

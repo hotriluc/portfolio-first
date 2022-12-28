@@ -2,17 +2,24 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { easing } from 'maath';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { computerActions } from '../../store/computer-slice';
 import EmbeddedGallery from './EmbeddedGallery';
 
 const Key = ({ which, command, ...props }) => {
+  const { nodes } = useGLTF('scene.glb');
+
   const ref = useRef();
   const dispatch = useDispatch();
   const [pressed, press] = useState(false);
-  const { nodes } = useGLTF('scene.glb');
+  const [hovered, setHovered] = useState(false);
+
   const [x, y, z] = props.position;
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+  }, [hovered]);
 
   /**
    * Animate key press
@@ -40,21 +47,43 @@ const Key = ({ which, command, ...props }) => {
     <mesh
       ref={ref}
       geometry={nodes[which].geometry}
-      onPointerDown={pressButtonHandler}
-      onPointerUp={() => press(false)}
-      onPointerLeave={() => press(false)}
+      onPointerDown={(e) => {
+        e.stopPropagation();
+        pressButtonHandler();
+      }}
+      onPointerUp={(e) => {
+        e.stopPropagation();
+        press(false);
+      }}
+      onPointerLeave={(e) => {
+        e.stopPropagation();
+        press(false);
+      }}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        setHovered(true);
+      }}
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        setHovered(false);
+      }}
       {...props}
     />
   );
 };
 
 const Joystick = ({ command, ...props }) => {
-  const ref = useRef();
-  const [pressed, press] = useState(false);
   const { nodes } = useGLTF('scene.glb');
   const dispatch = useDispatch();
 
-  console.log(nodes);
+  const ref = useRef();
+
+  const [pressed, press] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+  }, [hovered]);
 
   /**
    * Animate joystick
@@ -91,26 +120,15 @@ const Joystick = ({ command, ...props }) => {
         scale={[0.3, 0.3, 0.08]}
         ref={ref}
         onPointerDown={toggleJoystickHandler}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHovered(true);
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation();
+          setHovered(false);
+        }}
       />
-
-      {/* <group
-        name="Joystick"
-        position={[-1.2, 0.5, -0.62]}
-        scale={[0.3, 0.3, 0.08]}
-        ref={ref}
-      >
-        <mesh
-          name="Sphere001"
-          geometry={nodes.Sphere001.geometry}
-          // material={props.joystickMaterial}
-          onPointerDown={toggleJoystickHandler}
-        />
-        <mesh
-          name="Sphere001_1"
-          geometry={nodes.Sphere001_1.geometry}
-          // material={props.joystickMaterial}
-        />
-      </group> */}
     </>
   );
 };
