@@ -187,15 +187,25 @@ const Phone = () => {
             material-color={mailIconColor}
             material-roughness={mailIconRoughness}
             material-metalness={mailIconMetalness}
-            onPointerDown={() => {
+            onPointerDown={(e) => {
+              e.stopPropagation();
               setEmailIsPressed(true);
             }}
-            onPointerUp={() => setEmailIsPressed(false)}
-            onPointerLeave={() => setEmailIsPressed(false)}
-            onPointerOver={() => {
+            onPointerUp={(e) => {
+              e.stopPropagation();
+              window.open('mailto:example@gmail.com');
+              setEmailIsPressed(false);
+            }}
+            onPointerLeave={(e) => {
+              e.stopPropagation();
+              setEmailIsPressed(false);
+            }}
+            onPointerOver={(e) => {
+              e.stopPropagation();
               setHovered(true);
             }}
-            onPointerOut={() => {
+            onPointerOut={(e) => {
+              e.stopPropagation();
               setHovered(false);
             }}
           >
@@ -221,15 +231,25 @@ const Phone = () => {
             material-color={gitHubIconColor}
             material-roughness={gitHubIconRoughness}
             material-metalness={gitHubIconMetalness}
-            onPointerDown={() => {
+            onPointerDown={(e) => {
+              e.stopPropagation();
               setGitIsPressed(true);
             }}
-            onPointerUp={() => setGitIsPressed(false)}
-            onPointerLeave={() => setGitIsPressed(false)}
-            onPointerOver={() => {
+            onPointerUp={(e) => {
+              e.stopPropagation();
+              window.open('https://github.com/hotriluc');
+              setGitIsPressed(false);
+            }}
+            onPointerLeave={(e) => {
+              e.stopPropagation();
+              setGitIsPressed(false);
+            }}
+            onPointerOver={(e) => {
+              e.stopPropagation();
               setHovered(true);
             }}
-            onPointerOut={() => {
+            onPointerOut={(e) => {
+              e.stopPropagation();
               setHovered(false);
             }}
           >
@@ -256,15 +276,25 @@ const Phone = () => {
             material-color={linkedIconColor}
             material-roughness={linkedIconRoughness}
             material-metalness={linkedIconMetalness}
-            onPointerDown={() => {
+            onPointerDown={(e) => {
+              e.stopPropagation();
               setLinkedIsPressed(true);
             }}
-            onPointerUp={() => setLinkedIsPressed(false)}
-            onPointerLeave={() => setLinkedIsPressed(false)}
-            onPointerOver={() => {
+            onPointerUp={(e) => {
+              e.stopPropagation();
+              window.open('https://www.linkedin.com/in/luc-ho/');
+              setLinkedIsPressed(false);
+            }}
+            onPointerLeave={(e) => {
+              e.stopPropagation();
+              setLinkedIsPressed(false);
+            }}
+            onPointerOver={(e) => {
+              e.stopPropagation();
               setHovered(true);
             }}
-            onPointerOut={() => {
+            onPointerOut={(e) => {
+              e.stopPropagation();
               setHovered(false);
             }}
           >
