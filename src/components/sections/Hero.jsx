@@ -1,11 +1,14 @@
-import { animated, useSpring, useTrail } from '@react-spring/web';
+import { animated, useSpring, useSpringRef, useTrail } from '@react-spring/web';
+import { useEffect } from 'react';
 import { Section } from '../../styles/Global';
 import { Name, Title } from '../../styles/Hero';
 
-export const Hero = () => {
+export const Hero = ({ isLoaded }) => {
   const name = 'Luc.Ho';
 
+  const trailSpringRef = useSpringRef();
   const trail = useTrail(name.length, {
+    ref: trailSpringRef,
     from: {
       opacity: 0,
       x: 45,
@@ -14,9 +17,12 @@ export const Hero = () => {
       opacity: 1,
       x: 0,
     },
+    // config: { tension: 500, friction: 200 },
   });
 
+  const titleSpringRef = useSpringRef();
   const titleSpring = useSpring({
+    ref: titleSpringRef,
     from: {
       opacity: 0,
       y: -70,
@@ -25,7 +31,15 @@ export const Hero = () => {
       opacity: 1,
       y: 0,
     },
+    config: { tension: 500, friction: 200 },
   });
+
+  useEffect(() => {
+    if (isLoaded) {
+      trailSpringRef.start();
+      titleSpringRef.start();
+    }
+  }, [isLoaded]);
 
   return (
     <Section padding="2rem 4rem">
