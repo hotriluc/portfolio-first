@@ -7,6 +7,7 @@ import { useFrame } from '@react-three/fiber';
 import { easing } from 'maath';
 
 import EmbeddedGallery from './EmbeddedGallery';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const Key = ({ which, command, ...props }) => {
   const { nodes } = useGLTF('scene.glb');
@@ -138,14 +139,30 @@ const Computer = ({ portal }) => {
   const computerRef = useRef();
   const computerBodyRef = useRef();
   const { nodes, materials } = useGLTF('scene.glb');
+  const { width } = useWindowDimensions();
+
+  useFrame((state) => {
+    const et = state.clock.elapsedTime;
+
+    // phone animation
+    computerRef.current.position.y = Math.sin(et * 0.7 + 1 * 3000) * 4;
+
+    computerRef.current.children.forEach((child) => {
+      child.rotation.z = 2.57 + Math.cos(et * 0.5 + 3000) / 15;
+    });
+  });
 
   return (
     <group ref={computerRef}>
       <mesh
         name="Screen"
         geometry={nodes.Screen.geometry}
-        position={[-373.11, 380.27, -177.86]}
-        rotation={[1.25, 0.45, 2.57]}
+        position={[
+          width > 768 ? -373.11 : -290,
+          width > 768 ? 380.27 : 420,
+          -177.86,
+        ]}
+        rotation={[1.25, 0.36, 2.57]}
         scale={55.74}
         material={materials.ComputerAccessories}
       >
@@ -164,8 +181,12 @@ const Computer = ({ portal }) => {
         name="ComputerBody"
         geometry={nodes.ComputerBody.geometry}
         material={materials.Computer}
-        position={[-373.11, 380.27, -177.87]}
-        rotation={[1.25, 0.45, 2.57]}
+        position={[
+          width > 768 ? -373.11 : -290,
+          width > 768 ? 380.27 : 420,
+          -177.87,
+        ]}
+        rotation={[1.25, 0.36, 2.57]}
         scale={55.74}
         material-color={'#1a1a1a'}
         material-roughness={0.12}

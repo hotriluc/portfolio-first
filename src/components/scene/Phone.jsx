@@ -3,10 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { easing } from 'maath';
-import { useControls } from 'leva';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const Phone = () => {
   const { nodes, materials } = useGLTF('scene.glb');
+  const { width } = useWindowDimensions();
 
   const phoneRef = useRef();
   const gitRef = useRef();
@@ -19,12 +20,6 @@ const Phone = () => {
   const [emailIsPressed, setEmailIsPressed] = useState(false);
   const [linkedIsPressed, setLinkedIsPressed] = useState(false);
   const [pdfIsPressed, setPdfIsPressed] = useState(false);
-
-  const { textColor, fileColor, imageColor } = useControls({
-    textColor: '#a3a3a3',
-    fileColor: '#fbfbfb',
-    imageColor: '#c1c1c1',
-  });
 
   useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
@@ -90,7 +85,11 @@ const Phone = () => {
         name="PhoneBody"
         geometry={nodes.PhoneBody.geometry}
         material={materials.PhoneBody}
-        position={[-370, 641.7, 163.18]}
+        position={[
+          -370,
+          width > 768 ? 641.7 : 722,
+          width > 768 ? 163.18 : 209.18,
+        ]}
         rotation={[Math.PI / 3, -0.3, 0.99]}
         scale={[-49.77, -5.02, -91.32]}
         material-color={'#a08bc4'}
@@ -256,7 +255,7 @@ const Phone = () => {
             position={[0, -2.24, 0.02]}
             rotation={[Math.PI, 0, Math.PI]}
             scale={[-0.62, -0.49, -0.34]}
-            material-color={imageColor}
+            material-color={'#c1c1c1'}
             material-roughness={0.15}
             material-metalness={1}
           >
@@ -268,7 +267,7 @@ const Phone = () => {
               position={[0, 4.87, 0.17]}
               rotation={[-1.57, 0, Math.PI]}
               scale={[0.44, 0.44, 0.7]}
-              material-color={fileColor}
+              material-color={'#fbfbfb'}
               material-roughness={0.25}
               material-metalness={1}
               onPointerDown={(e) => {
@@ -322,7 +321,7 @@ const Phone = () => {
                 position={[0, -0.29, 1.73]}
                 rotation={[Math.PI / 2, 0, 0]}
                 scale={[0.91, 9.03, 0.91]}
-                material-color={textColor}
+                material-color={'#a3a3a3'}
                 material-roughness={0.18}
                 material-metalness={1}
               />
