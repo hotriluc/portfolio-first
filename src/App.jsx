@@ -47,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
         #7d74a1 97%
       );
       /* background: radial-gradient(circle at bottom center, #212121 0%, #101010 80%); */
-      color: #fbfbfb;
+      color: #FCFBF4;
 
       overflow: hidden;
     }

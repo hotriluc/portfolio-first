@@ -53,7 +53,7 @@ export const Section = styled.section`
 export const Quote = styled(animated.div)`
   max-width: 450px;
   min-width: 350px;
-  border-left: 5px solid white;
+  border-left: 5px solid #fcfbf4;
   padding-left: 2rem;
 
   h2 {
@@ -63,6 +63,10 @@ export const Quote = styled(animated.div)`
     letter-spacing: -1px;
 
     margin-bottom: 3.5rem;
+
+    @media (max-width: 768px) {
+      font-size: 4rem;
+    }
   }
 
   p {
@@ -71,6 +75,14 @@ export const Quote = styled(animated.div)`
     line-height: 1.5;
 
     word-wrap: break-word;
+
+    @media (max-width: 768px) {
+      font-size: 2.4rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 1.6rem;
   }
 `;
 

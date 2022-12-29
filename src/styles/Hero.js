@@ -10,6 +10,12 @@ export const Title = styled(animated.h2)`
   margin-top: 4rem;
   margin-bottom: 5rem;
   margin-left: 1.6rem;
+
+  @media (max-width: 768px) {
+    font-size: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
 `;
 
 export const Name = styled(animated.h1)`
@@ -23,5 +29,9 @@ export const Name = styled(animated.h1)`
 
   a {
     display: inline-block;
+  }
+
+  @media (max-width: 420px) {
+    font-size: 15rem;
   }
 `;

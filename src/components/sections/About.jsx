@@ -22,10 +22,9 @@ const About = () => {
           <HeadingQuote>
             <h2>A little bit more</h2>
             <p>
-              There story how I got into programming will be short. <br />I
-              started my journey as I entered my university in 2015. <br />
-              But during my studying what really caught my attention was the web
-              development.
+              I dived into the world of programming in 2015. A long story short:
+              <br /> I did not like it at first. But during my studying what
+              really caught my attention was the web development.
             </p>
           </HeadingQuote>
         </Flex>

@@ -19,4 +19,8 @@ export const LoaderBox = styled(animated.div)`
   // opacity: 0.3,
   position: absolute;
   z-index: 1000;
+
+  @media (max-width: 420px) {
+    font-size: 8.5rem;
+  }
 `;
