@@ -36,6 +36,10 @@ export const Flex = styled.div`
     css`
       align-items: center;
     `}
+
+    @media (max-width: 420px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const Section = styled.section`
@@ -66,6 +70,7 @@ export const Quote = styled(animated.div)`
 
     @media (max-width: 768px) {
       font-size: 4rem;
+      margin-bottom: 2rem;
     }
   }
 

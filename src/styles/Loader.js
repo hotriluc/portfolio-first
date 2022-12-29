@@ -20,6 +20,10 @@ export const LoaderBox = styled(animated.div)`
   position: absolute;
   z-index: 1000;
 
+  @media (max-width: 768px) {
+    font-size: 8.5rem;
+  }
+
   @media (max-width: 420px) {
     font-size: 8.5rem;
   }

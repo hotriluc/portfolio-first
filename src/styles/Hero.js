@@ -31,7 +31,11 @@ export const Name = styled(animated.h1)`
     display: inline-block;
   }
 
+  @media (max-width: 768px) {
+    font-size: 12rem;
+  }
+
   @media (max-width: 420px) {
-    font-size: 15rem;
+    font-size: 12rem;
   }
 `;

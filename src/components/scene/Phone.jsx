@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { easing } from 'maath';
+import { useControls } from 'leva';
 
 const Phone = () => {
   const { nodes, materials } = useGLTF('scene.glb');
@@ -11,11 +12,19 @@ const Phone = () => {
   const gitRef = useRef();
   const emailRef = useRef();
   const linkedRef = useRef();
+  const pdfRef = useRef();
 
   const [hovered, setHovered] = useState(false);
   const [gitIsPressed, setGitIsPressed] = useState(false);
   const [emailIsPressed, setEmailIsPressed] = useState(false);
   const [linkedIsPressed, setLinkedIsPressed] = useState(false);
+  const [pdfIsPressed, setPdfIsPressed] = useState(false);
+
+  const { textColor, fileColor, imageColor } = useControls({
+    textColor: '#a3a3a3',
+    fileColor: '#fbfbfb',
+    imageColor: '#c1c1c1',
+  });
 
   useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
@@ -58,6 +67,17 @@ const Phone = () => {
         linkedRef.current.position.x,
         linkedIsPressed ? -2 : -3,
         linkedRef.current.position.z,
+      ],
+      0.1,
+      delta
+    );
+
+    easing.damp3(
+      pdfRef.current.position,
+      [
+        pdfRef.current.position.x,
+        pdfIsPressed ? 4 : 5.5,
+        pdfRef.current.position.z,
       ],
       0.1,
       delta
@@ -236,10 +256,78 @@ const Phone = () => {
             position={[0, -2.24, 0.02]}
             rotation={[Math.PI, 0, Math.PI]}
             scale={[-0.62, -0.49, -0.34]}
-            material-color={'#fafafa'}
+            material-color={imageColor}
             material-roughness={0.15}
             material-metalness={1}
-          />
+          >
+            <mesh
+              name="PdfIcon"
+              ref={pdfRef}
+              geometry={nodes.PdfIcon.geometry}
+              material={materials.PdfIconMaterial}
+              position={[0, 4.87, 0.17]}
+              rotation={[-1.57, 0, Math.PI]}
+              scale={[0.44, 0.44, 0.7]}
+              material-color={fileColor}
+              material-roughness={0.25}
+              material-metalness={1}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                setPdfIsPressed(true);
+              }}
+              onPointerUp={(e) => {
+                e.stopPropagation();
+                window.open('./public/CV_Ho.pdf');
+                setPdfIsPressed(false);
+              }}
+              onPointerLeave={(e) => {
+                e.stopPropagation();
+                setPdfIsPressed(false);
+              }}
+              onPointerOver={(e) => {
+                e.stopPropagation();
+                setHovered(true);
+              }}
+              onPointerOut={(e) => {
+                e.stopPropagation();
+                setHovered(false);
+              }}
+            >
+              <mesh
+                name="Extension"
+                geometry={nodes.Extension.geometry}
+                material={materials.Extension}
+                position={[-0.62, 0.29, 0.76]}
+                scale={[0.41, 0.17, 0.5]}
+                material-color={'#f40f02'}
+                material-roughness={0.25}
+                material-metalness={1}
+              >
+                <mesh
+                  name="ExtensionText"
+                  geometry={nodes.ExtensionText.geometry}
+                  material={materials.ExtensionText}
+                  position={[0, 0.05, 1.19]}
+                  rotation={[Math.PI / 2, 0, 0]}
+                  scale={[0.8, 4.39, 1.89]}
+                  material-color={'#fbfbfb'}
+                  material-roughness={0.18}
+                  material-metalness={1}
+                />
+              </mesh>
+              <mesh
+                name="PdfText"
+                geometry={nodes.PdfText.geometry}
+                material={materials.Material}
+                position={[0, -0.29, 1.73]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={[0.91, 9.03, 0.91]}
+                material-color={textColor}
+                material-roughness={0.18}
+                material-metalness={1}
+              />
+            </mesh>
+          </mesh>
           <mesh
             name="Notification"
             geometry={nodes.Notification.geometry}

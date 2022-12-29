@@ -12,9 +12,11 @@ import {
 import Computer from './Computer';
 import Phone from './Phone';
 import University from './University';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 export function Models(props) {
   const group = useRef();
+  const { width } = useWindowDimensions();
 
   const { nodes, materials, animations } = useGLTF('/scene.glb');
   const { actions } = useAnimations(animations, group);
@@ -138,9 +140,9 @@ export function Models(props) {
         <PerspectiveCamera
           name="Camera"
           makeDefault={true}
-          far={10000}
+          far={2000}
           near={0.1}
-          fov={30}
+          fov={width > 768 ? 37 : 47}
           position={[193.52, 45.61, -157.14]}
           rotation={[2.65, 0.87, -2.75]}
           scale={25.52}

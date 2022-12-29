@@ -1,10 +1,13 @@
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { Flex, Highlight, Section } from '../../styles/Global';
 import HeadingQuote from '../ui/HeadingQuote';
 
 const About = () => {
+  const { width } = useWindowDimensions();
+
   return (
-    <Section height="220vh">
-      <Flex column gap="20rem">
+    <Section height={width > 768 ? '220vh' : '205vh'}>
+      <Flex column gap={width > 768 ? '20rem' : '15rem'}>
         <HeadingQuote>
           <h2>About</h2>
           <p>
