@@ -1,6 +1,6 @@
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { Flex, Highlight, Section } from '../../styles/Global';
-import HeadingQuote from '../ui/HeadingQuote';
+import HeadingQuote from '../UI/HeadingQuote';
 
 const About = () => {
   const { width } = useWindowDimensions();
