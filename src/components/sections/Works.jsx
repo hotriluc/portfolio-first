@@ -1,5 +1,5 @@
 import { Highlight, Section } from '../../styles/Global';
-import HeadingQuote from '../ui/HeadingQuote';
+import HeadingQuote from '../UI/HeadingQuote';
 
 const Works = () => {
   return (
