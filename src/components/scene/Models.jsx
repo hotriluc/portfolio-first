@@ -31,12 +31,12 @@ export function Models(props) {
     actions['CameraAction.001'].time = THREE.MathUtils.lerp(
       actions['CameraAction.001'].time,
       actions['CameraAction.001'].getClip().duration * scroll.current,
-      0.02
+      0.01
     );
     actions['Action.005'].time = THREE.MathUtils.lerp(
       actions['Action.005'].time,
       actions['Action.005'].getClip().duration * scroll.current,
-      0.02
+      0.01
     );
   });
 

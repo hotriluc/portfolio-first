@@ -117,7 +117,7 @@ function App() {
           // style={{ zIndex: 1 }}
           pages={5}
           distance={1}
-          damping={20}
+          damping={1.4}
           horizontal={false}
           infinite={false}
         >
