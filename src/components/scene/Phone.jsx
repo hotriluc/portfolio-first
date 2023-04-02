@@ -276,7 +276,7 @@ const Phone = () => {
               }}
               onPointerUp={(e) => {
                 e.stopPropagation();
-                window.open('/CV_Ho.pdf');
+                window.open('/CV_Ho_Tri_Luc.pdf');
                 setPdfIsPressed(false);
               }}
               onPointerLeave={(e) => {
