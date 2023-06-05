@@ -280,14 +280,14 @@ const University = () => {
             material-roughness={0.14}
             material-metalness={1}
           />
-          <mesh
+          {/* <mesh
             name="Cube006_1"
             geometry={nodes.Cube006_1.geometry}
             material={materials.GuitarAccessories}
             position={[-0.27, 0.05, -0.14]}
             rotation={[0, 0, -1.58]}
             scale={[0.07, 0.08, 0.02]}
-          />
+          /> */}
           <mesh
             name="Neck"
             geometry={nodes.Neck.geometry}

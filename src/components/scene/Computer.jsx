@@ -198,7 +198,7 @@ const Computer = ({ portal }) => {
           zIndexRange={[1, -1]}
           transform
           position={[0, -0.1, 0]}
-          occlude={[computerBodyRef]}
+          // occlude={[computerBodyRef]}
         />
         <mesh
           name="Dynamic"
